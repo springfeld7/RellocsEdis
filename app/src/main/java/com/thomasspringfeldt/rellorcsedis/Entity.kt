@@ -20,7 +20,7 @@ abstract class Entity {
         Log.d(tag, "Entity created")
     }
 
-    open fun update(delta: Float) {}
+    open fun update(deltaTime: Float) {}
     open fun render(canvas: Canvas, paint: Paint) {}
     open fun onCollision(that: Entity) {} // Notify the Entity about collisions
 
