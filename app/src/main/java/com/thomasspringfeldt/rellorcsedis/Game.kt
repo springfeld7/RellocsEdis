@@ -2,6 +2,7 @@ package com.thomasspringfeldt.rellorcsedis
 
 import android.content.Context
 import android.graphics.Color
+import android.graphics.Paint
 
 import android.os.Build
 import android.os.SystemClock.uptimeMillis
@@ -11,10 +12,8 @@ import android.view.SurfaceHolder
 import android.view.SurfaceView
 import kotlin.random.Random
 
-const val STAGE_WIDTH = 1280
-const val STAGE_HEIGHT = 672
 const val TARGET_FPS = 60f
-const val PIXELS_PER_METER = 100
+const val PIXELS_PER_METER = 50
 var RNG = Random(uptimeMillis())
 lateinit var engine: Game
 
@@ -25,15 +24,14 @@ lateinit var engine: Game
 class Game(context: Context) : SurfaceView(context), Runnable, SurfaceHolder.Callback {
 
     private val tag = "Game"
-    private lateinit var gameThread : Thread
-    @Volatile private var isRunning : Boolean = false
-    private val level: LevelManager = LevelManager(TestLevel())
-
     init {
         engine = this
         holder?.addCallback(this)
-        holder?.setFixedSize(STAGE_WIDTH, STAGE_HEIGHT)
+        holder?.setFixedSize(screenWidth() / 2, screenHeight() / 2)
     }
+    private lateinit var gameThread : Thread
+    @Volatile private var isRunning : Boolean = false
+    private val level: LevelManager = LevelManager(TestLevel())
 
     /**
      * Game loop.
@@ -58,12 +56,10 @@ class Game(context: Context) : SurfaceView(context), Runnable, SurfaceHolder.Cal
      */
     private fun render() {
         val canvas = holder?.lockCanvas() ?: return
-        val random = RNG.nextInt(2)
-        if (random == 0) {
-            canvas.drawColor(Color.MAGENTA)
-        } else {
-            canvas.drawColor(Color.CYAN)
-        }
+        canvas.drawColor(Color.CYAN)
+        val paint = Paint()
+
+        level.entities.forEach { it.render(canvas, paint) }
 
         holder.unlockCanvasAndPost(canvas)
     }
@@ -73,6 +69,8 @@ class Game(context: Context) : SurfaceView(context), Runnable, SurfaceHolder.Cal
     fun screenToWorldX(pixelDistance: Float) = pixelDistance / PIXELS_PER_METER
     fun screenToWorldY(pixelDistance: Float) = pixelDistance / PIXELS_PER_METER
 
+    fun screenHeight() = context.resources.displayMetrics.heightPixels
+    fun screenWidth() = context.resources.displayMetrics.widthPixels
 
     /**
      * Stops the game from processing.
@@ -107,6 +105,7 @@ class Game(context: Context) : SurfaceView(context), Runnable, SurfaceHolder.Cal
 
     override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
         Log.d(tag, "SurfaceChanged(width: $width, height: $height)")
+        Log.d(tag, "Screen width(width: ${screenWidth()}, height: ${screenHeight()})")
     }
 
     override fun surfaceDestroyed(holder: SurfaceHolder) {
