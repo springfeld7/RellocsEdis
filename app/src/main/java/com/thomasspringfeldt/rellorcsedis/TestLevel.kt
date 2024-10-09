@@ -15,7 +15,5 @@ class TestLevel : LevelData() {
         tiles = arrayOf(
             intArrayOf(2,3,4,0,1)
         )
-
-        updateLevelDimension()
     }
 }

@@ -12,8 +12,6 @@ abstract class LevelData {
 
     var tiles: Array<IntArray> = emptyArray()
     var tileToBitMap = HashMap<Int, String>()
-    var height = 0
-    var width = 0
 
     fun getRow(y: Int) : IntArray {
         return tiles[y]
@@ -28,8 +26,6 @@ abstract class LevelData {
         return fileName ?: NULLSPRITE
     }
 
-    fun updateLevelDimension() {
-        height = tiles.size
-        width = getRow(0).size
-    }
+    fun height() = tiles.size
+    fun width() = getRow(0).size
 }
