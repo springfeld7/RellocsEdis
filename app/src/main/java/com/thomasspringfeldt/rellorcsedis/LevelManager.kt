@@ -6,7 +6,7 @@ package com.thomasspringfeldt.rellorcsedis
  */
 class LevelManager(data: LevelData) {
 
-    private val entities = ArrayList<Entity>()
+    val entities = ArrayList<Entity>()
     private val entitiesToAdd = ArrayList<Entity>()
     private val entitiesToRemove = ArrayList<Entity>()
 
@@ -44,13 +44,15 @@ class LevelManager(data: LevelData) {
                 }
             }
         }
+        addAndRemoveEntities()
     }
 
     private fun createEntity(spriteName: String, x: Float, y: Float) {
-        val entity: Entity = when (spriteName) {
+        val entity: Entity = StaticEntity(spriteName, x, y)
+            /*when (spriteName) {
             PLAYER -> //player entity
                 else -> //static entity
-        }
+        }*/
         addEntity(entity)
     }
 }
