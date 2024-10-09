@@ -14,7 +14,9 @@ import kotlin.random.Random
 const val STAGE_WIDTH = 1280
 const val STAGE_HEIGHT = 672
 const val TARGET_FPS = 60f
+const val PIXELS_PER_METER = 100
 var RNG = Random(uptimeMillis())
+lateinit var engine: Game
 
 /**
  * Game engine for Rellorcs Edis.
@@ -28,6 +30,7 @@ class Game(context: Context) : SurfaceView(context), Runnable, SurfaceHolder.Cal
     private val level: LevelManager = LevelManager(TestLevel())
 
     init {
+        engine = this
         holder?.addCallback(this)
         holder?.setFixedSize(STAGE_WIDTH, STAGE_HEIGHT)
     }
@@ -64,6 +67,12 @@ class Game(context: Context) : SurfaceView(context), Runnable, SurfaceHolder.Cal
 
         holder.unlockCanvasAndPost(canvas)
     }
+
+    fun worldToScreenX(worldDistance: Float) = (worldDistance * PIXELS_PER_METER).toInt()
+    fun worldToScreenY(worldDistance: Float) = (worldDistance * PIXELS_PER_METER).toInt()
+    fun screenToWorldX(pixelDistance: Float) = pixelDistance / PIXELS_PER_METER
+    fun screenToWorldY(pixelDistance: Float) = pixelDistance / PIXELS_PER_METER
+
 
     /**
      * Stops the game from processing.
