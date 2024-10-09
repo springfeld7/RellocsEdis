@@ -13,8 +13,6 @@ abstract class Entity {
     var y = 0f
     var width = 0f
     var height = 0f
-    var velX = 0f
-    var velY = 0f
 
     init {
         Log.d(tag, "Entity created")
