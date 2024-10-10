@@ -7,8 +7,8 @@ class Player(spriteName: String, x: Float, y: Float) :
     DynamicEntity(spriteName, x, y) {
 
     init {
-        width = 0.8f
-        height = 0.8f
+        width = 0.7f
+        height = 0.7f
         bitmap = loadBitMap(spriteName)
     }
 
