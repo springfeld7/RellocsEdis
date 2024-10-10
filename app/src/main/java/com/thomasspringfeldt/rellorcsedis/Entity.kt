@@ -3,7 +3,9 @@ package com.thomasspringfeldt.rellorcsedis
 import android.graphics.Canvas
 import android.graphics.Matrix
 import android.graphics.Paint
+import android.graphics.PointF
 import android.util.Log
+import kotlin.math.abs
 
 /**
  * Base class for game entities.
@@ -60,3 +62,38 @@ abstract class Entity {
 fun isColliding(a: Entity, b: Entity): Boolean {
     return !(a.right <= b.left || b.right <= a.left || a.bottom <= b.top || b.bottom <= a.top)
 }
+
+//a more refined AABB intersection test
+//returns a PointF with the intersection depth on both axis, or null
+
+fun getOverlap(a: Entity, b: Entity): PointF? {
+    val centerDeltaX = a.centerX - b.centerX
+    val halfWidths = (a.width + b.width) * 0.5f
+    val dx = abs(centerDeltaX)
+
+    if (dx > halfWidths) return null // No overlap on X
+
+    val centerDeltaY = a.centerY - b.centerY
+    val halfHeights = (a.height + b.height) * 0.5f
+    val dy = abs(centerDeltaY)
+
+    if (dy > halfHeights) return null // No overlap on Y
+
+    val overlapX = halfWidths - dx
+    val overlapY = halfHeights - dy
+
+    // Determine the direction of the overlap and return the smallest one.
+    return PointF(
+        if (overlapX < overlapY) {
+            if (centerDeltaX < 0) -overlapX else overlapX
+        } else {
+            0f
+        },
+        if (overlapY < overlapX) {
+            if (centerDeltaY < 0) -overlapY else overlapY
+        } else {
+            0f
+        }
+    )
+}
+

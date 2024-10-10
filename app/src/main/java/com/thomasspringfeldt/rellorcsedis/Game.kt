@@ -36,6 +36,12 @@ class Game(context: Context) : SurfaceView(context), Runnable, SurfaceHolder.Cal
     private val camera = Viewport(screenWidth(), screenHeight(), 0.0f, 12.0f)
     private val level: LevelManager = LevelManager(TestLevel())
 
+    fun worldToScreenX(worldDistance: Float) = camera.worldToScreenX(worldDistance)
+    fun worldToScreenY(worldDistance: Float) = camera.worldToScreenY(worldDistance)
+    fun screenHeight() = context.resources.displayMetrics.heightPixels
+    fun screenWidth() = context.resources.displayMetrics.widthPixels
+    fun levelHeight() = level.levelHeight
+
     /**
      * Game loop.
      */
@@ -59,16 +65,8 @@ class Game(context: Context) : SurfaceView(context), Runnable, SurfaceHolder.Cal
      */
     private fun update(deltaTime: Float) {
 
-
-        level.update(deltaTime) //fix later
+        level.update(deltaTime)
         camera.lookAt(level.player)
-    }
-
-    /**
-     * Filters all level entities and returns only the visible ones.
-     */
-    private fun buildVisibleSet() : List<Entity> {
-        return level.entities.filter { camera.inView(it) }
     }
 
     /**
@@ -93,17 +91,19 @@ class Game(context: Context) : SurfaceView(context), Runnable, SurfaceHolder.Cal
         holder.unlockCanvasAndPost(canvas)
     }
 
-    fun worldToScreenX(worldDistance: Float) = camera.worldToScreenX(worldDistance)
-    fun worldToScreenY(worldDistance: Float) = camera.worldToScreenY(worldDistance)
-    fun screenHeight() = context.resources.displayMetrics.heightPixels
-    fun screenWidth() = context.resources.displayMetrics.widthPixels
-    fun levelHeight() = level.levelHeight
+    /**
+     * Filters all level entities and returns only the visible ones.
+     */
+    private fun buildVisibleSet() : List<Entity> {
+        return level.entities.filter { camera.inView(it) }
+    }
 
     /**
      * Stops the game from processing.
      */
     fun onPause() {
         Log.d(tag, "OnPause()")
+        isRunning = false
     }
 
     /**
