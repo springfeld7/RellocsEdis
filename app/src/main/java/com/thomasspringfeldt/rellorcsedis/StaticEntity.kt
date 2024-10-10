@@ -6,7 +6,10 @@ import android.graphics.Matrix
 import android.graphics.Paint
 import kotlin.math.ceil
 
-
+/**
+ * Entity class for static, concrete, sprites.
+ * @author Thomas Springfeldt
+ */
 open class StaticEntity(spriteName: String, x: Float, y: Float) : Entity() {
     val bitmap : Bitmap
 
