@@ -22,6 +22,7 @@ class Viewport(
     init {
         require(metersToShowX > 0f || metersToShowY > 0f) { "One of the dimensions must be provided!" }
         setMetersToShow(metersToShowX, metersToShowY)
+        lookAt(2.0f, 0.0f) //default view target
     }
 
     private fun setMetersToShow(metersToShowX: Float, metersToShowY: Float) {

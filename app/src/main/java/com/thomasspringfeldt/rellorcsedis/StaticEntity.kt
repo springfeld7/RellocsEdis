@@ -2,8 +2,10 @@ package com.thomasspringfeldt.rellorcsedis
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Matrix
 import android.graphics.Paint
 import kotlin.math.ceil
+
 
 class StaticEntity(spriteName: String, x: Float, y: Float) : Entity() {
     val bitmap : Bitmap
@@ -20,10 +22,7 @@ class StaticEntity(spriteName: String, x: Float, y: Float) : Entity() {
             spriteName, widthInPixels.toInt(), heightInPixels.toInt())
     }
 
-    override fun render(canvas: Canvas, paint: Paint) {
-        canvas.drawBitmap(bitmap,
-            engine.worldToScreenX(x).toFloat(),
-            engine.worldToScreenY(y).toFloat(),
-            paint)
+    override fun render(canvas: Canvas, transform: Matrix, paint: Paint) {
+        canvas.drawBitmap(bitmap, transform, paint)
     }
 }
