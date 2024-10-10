@@ -7,7 +7,7 @@ import android.graphics.Paint
 import kotlin.math.ceil
 
 
-class StaticEntity(spriteName: String, x: Float, y: Float) : Entity() {
+open class StaticEntity(spriteName: String, x: Float, y: Float) : Entity() {
     val bitmap : Bitmap
 
     init {
