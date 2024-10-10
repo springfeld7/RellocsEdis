@@ -1,8 +1,5 @@
 package com.thomasspringfeldt.rellorcsedis
 
-import android.graphics.Canvas
-import android.graphics.Matrix
-import android.graphics.Paint
 import androidx.core.math.MathUtils.clamp
 
 const val MAX_DELTA = 0.49f
@@ -53,9 +50,5 @@ open class DynamicEntity(spriteName: String, x: Float, y: Float) : StaticEntity(
     private fun moveHorizontally(deltaTime: Float) {
         val deltaX = clamp(velX * deltaTime, -MAX_DELTA, MAX_DELTA)
         x += deltaX
-    }
-
-    override fun render(canvas: Canvas, transform: Matrix, paint: Paint) {
-        super.render(canvas, transform, paint)
     }
 }

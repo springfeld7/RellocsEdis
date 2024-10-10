@@ -36,7 +36,7 @@ class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context,
     private lateinit var gameThread : Thread
     @Volatile private var isRunning : Boolean = false
     private var inputs = InputManager()
-    private val camera = Viewport(screenWidth(), screenHeight(), 0f, 9f)
+    private val camera = Viewport(screenWidth(), screenHeight(), 0f, 144f)
     private val level: LevelManager = LevelManager(TestLevel())
 
     fun worldToScreenX(worldDistance: Float) = camera.worldToScreenX(worldDistance)
