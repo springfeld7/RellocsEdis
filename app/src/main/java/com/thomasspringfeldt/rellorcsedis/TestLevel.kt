@@ -8,12 +8,14 @@ class TestLevel : LevelData() {
     init {
         tileToBitMap[NO_TILE] = "no_tile"
         tileToBitMap[1] = PLAYER
-        tileToBitMap[2] = "ground_left"
+        tileToBitMap[2] = "ground_left_round"
         tileToBitMap[3] = "ground"
-        tileToBitMap[4] = "ground_right"
+        tileToBitMap[4] = "ground_right_round"
 
         tiles = arrayOf(
-            intArrayOf(2,3,4,0,1)
+            intArrayOf(2,0,1,0,4),
+            intArrayOf(2,3,3,3,4),
+            intArrayOf(2,3,3,3,4)
         )
     }
 }

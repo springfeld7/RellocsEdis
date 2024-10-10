@@ -3,6 +3,7 @@ package com.thomasspringfeldt.rellorcsedis
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Paint
+import kotlin.math.ceil
 
 class StaticEntity(spriteName: String, x: Float, y: Float) : Entity() {
     val bitmap : Bitmap
@@ -12,11 +13,11 @@ class StaticEntity(spriteName: String, x: Float, y: Float) : Entity() {
         this.y = y
         width = 1.0f
         height = 1.0f
-        val widthInPixels = engine.worldToScreenX(width)
-        val heightInPixels = engine.worldToScreenY(height)
+        val widthInPixels = ceil(engine.worldToScreenX(width))
+        val heightInPixels = ceil(engine.worldToScreenY(height))
 
         bitmap = BitmapUtils.loadScaledBitmap(engine.context,
-            spriteName, widthInPixels, heightInPixels)
+            spriteName, widthInPixels.toInt(), heightInPixels.toInt())
     }
 
     override fun render(canvas: Canvas, paint: Paint) {

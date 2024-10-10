@@ -13,7 +13,6 @@ import android.view.SurfaceView
 import kotlin.random.Random
 
 const val TARGET_FPS = 60f
-const val PIXELS_PER_METER = 50
 var RNG = Random(uptimeMillis())
 lateinit var engine: Game
 
@@ -31,6 +30,7 @@ class Game(context: Context) : SurfaceView(context), Runnable, SurfaceHolder.Cal
     }
     private lateinit var gameThread : Thread
     @Volatile private var isRunning : Boolean = false
+    private val camera = Viewport(screenWidth(), screenHeight(), 20.0f, 0.0f)
     private val level: LevelManager = LevelManager(TestLevel())
 
     /**
@@ -64,11 +64,8 @@ class Game(context: Context) : SurfaceView(context), Runnable, SurfaceHolder.Cal
         holder.unlockCanvasAndPost(canvas)
     }
 
-    fun worldToScreenX(worldDistance: Float) = (worldDistance * PIXELS_PER_METER).toInt()
-    fun worldToScreenY(worldDistance: Float) = (worldDistance * PIXELS_PER_METER).toInt()
-    fun screenToWorldX(pixelDistance: Float) = pixelDistance / PIXELS_PER_METER
-    fun screenToWorldY(pixelDistance: Float) = pixelDistance / PIXELS_PER_METER
-
+    fun worldToScreenX(worldDistance: Float) = camera.worldToScreenX(worldDistance)
+    fun worldToScreenY(worldDistance: Float) = camera.worldToScreenY(worldDistance)
     fun screenHeight() = context.resources.displayMetrics.heightPixels
     fun screenWidth() = context.resources.displayMetrics.widthPixels
 
