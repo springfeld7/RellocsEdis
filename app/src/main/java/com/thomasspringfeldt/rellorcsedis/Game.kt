@@ -16,6 +16,7 @@ import kotlin.random.Random
 
 const val TARGET_FPS = 60f
 var RNG = Random(uptimeMillis())
+const val NANOS_TO_SECOND = 1f / 1000000000.0f
 lateinit var engine: Game
 
 /**
@@ -32,7 +33,7 @@ class Game(context: Context) : SurfaceView(context), Runnable, SurfaceHolder.Cal
     }
     private lateinit var gameThread : Thread
     @Volatile private var isRunning : Boolean = false
-    private val camera = Viewport(screenWidth(), screenHeight(), 0.0f, 9.0f)
+    private val camera = Viewport(screenWidth(), screenHeight(), 0.0f, 12.0f)
     private val level: LevelManager = LevelManager(TestLevel())
 
     /**
@@ -40,12 +41,15 @@ class Game(context: Context) : SurfaceView(context), Runnable, SurfaceHolder.Cal
      */
     override fun run() {
         Log.d(tag, "run()")
+        var lastFrame = System.nanoTime()
         while(isRunning) {
+            val deltaTime = (System.nanoTime() - lastFrame) * NANOS_TO_SECOND
+            lastFrame = System.nanoTime()
             //calculate the delta time
             //update all entities, passing in dt
             //handle input
 
-            update()
+            update(deltaTime)
             render()
         }
     }
@@ -53,8 +57,11 @@ class Game(context: Context) : SurfaceView(context), Runnable, SurfaceHolder.Cal
     /**
      * Updates game state.
      */
-    private fun update() {
-        level.update(0.1f) //fix later
+    private fun update(deltaTime: Float) {
+
+
+        level.update(deltaTime) //fix later
+        camera.lookAt(level.player)
     }
 
     /**
@@ -73,7 +80,7 @@ class Game(context: Context) : SurfaceView(context), Runnable, SurfaceHolder.Cal
         val paint = Paint()
         var transform = Matrix()
         var position: PointF
-        camera.lookAt(2.5f, 0.5f)
+        //camera.lookAt(2.5f, 0.5f)
         val visible = buildVisibleSet()
 
         visible.forEach {
@@ -90,6 +97,7 @@ class Game(context: Context) : SurfaceView(context), Runnable, SurfaceHolder.Cal
     fun worldToScreenY(worldDistance: Float) = camera.worldToScreenY(worldDistance)
     fun screenHeight() = context.resources.displayMetrics.heightPixels
     fun screenWidth() = context.resources.displayMetrics.widthPixels
+    fun levelHeight() = level.levelHeight
 
     /**
      * Stops the game from processing.

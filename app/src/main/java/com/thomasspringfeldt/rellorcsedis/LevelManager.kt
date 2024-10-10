@@ -6,9 +6,11 @@ package com.thomasspringfeldt.rellorcsedis
  */
 class LevelManager(data: LevelData) {
 
+    lateinit var player: DynamicEntity
     val entities = ArrayList<Entity>()
     private val entitiesToAdd = ArrayList<Entity>()
     private val entitiesToRemove = ArrayList<Entity>()
+    var levelHeight = 0f
 
     init {
         loadAssets(data)
@@ -16,8 +18,19 @@ class LevelManager(data: LevelData) {
 
     fun update(deltaTime: Float) {
         entities.forEach { it.update(deltaTime) }
-        //collision detection
-        //add and remove entities
+        checkCollisions()
+    }
+
+    private fun checkCollisions() {
+        for (e in entities) {
+            if (e == player) {
+                continue
+            }
+            if (isColliding(e, player)) {
+                e.onCollision(player)
+                player.onCollision(e)
+            }
+        }
     }
 
     fun addAndRemoveEntities() {
@@ -44,15 +57,16 @@ class LevelManager(data: LevelData) {
                 }
             }
         }
+        levelHeight = data.height().toFloat()
         addAndRemoveEntities()
     }
 
     private fun createEntity(spriteName: String, x: Float, y: Float) {
-        val entity: Entity = StaticEntity(spriteName, x, y)
-            /*when (spriteName) {
-            PLAYER -> //player entity
-                else -> //static entity
-        }*/
-        addEntity(entity)
+        if (spriteName == PLAYER) {
+            player = DynamicEntity(spriteName, x, y)
+            addEntity(player)
+        } else {
+            addEntity(StaticEntity(spriteName, x, y))
+        }
     }
 }
