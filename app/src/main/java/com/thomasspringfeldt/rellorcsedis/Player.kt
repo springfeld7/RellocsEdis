@@ -6,6 +6,12 @@ val PLAYER_JUMP_FORCE: Float = -(GRAVITY / 2f) //whatever feels good!
 class Player(spriteName: String, x: Float, y: Float) :
     DynamicEntity(spriteName, x, y) {
 
+    init {
+        width = 0.8f
+        height = 0.8f
+        bitmap = loadBitMap(spriteName)
+    }
+
     override fun update(dt: Float) {
         val controls: InputManager = engine.getControls()
         val direction: Float = controls.horizontalFactor

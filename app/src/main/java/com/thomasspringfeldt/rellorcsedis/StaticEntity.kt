@@ -11,17 +11,23 @@ import kotlin.math.ceil
  * @author Thomas Springfeldt
  */
 open class StaticEntity(spriteName: String, x: Float, y: Float) : Entity() {
-    val bitmap : Bitmap
+
+    var bitmap: Bitmap
 
     init {
         this.x = x
         this.y = y
         width = 1.0f
         height = 1.0f
+        bitmap = loadBitMap(spriteName)
+    }
+
+    protected fun loadBitMap(spriteName: String): Bitmap {
         val widthInPixels = ceil(engine.worldToScreenX(width))
         val heightInPixels = ceil(engine.worldToScreenY(height))
 
-        bitmap = BitmapUtils.loadScaledBitmap(engine.context,
+        return BitmapUtils.loadScaledBitmap(
+            engine.context,
             spriteName, widthInPixels.toInt(), heightInPixels.toInt())
     }
 
