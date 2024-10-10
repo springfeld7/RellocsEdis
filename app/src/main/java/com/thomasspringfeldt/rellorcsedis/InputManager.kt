@@ -1,6 +1,6 @@
 package com.thomasspringfeldt.rellorcsedis
 
-open class InputOverlay {
+open class InputManager {
     var verticalFactor = 0.0f
     var horizontalFactor = 0.0f
     var isJumping = false
