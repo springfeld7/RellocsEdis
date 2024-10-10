@@ -8,6 +8,7 @@ import android.graphics.PointF
 
 import android.os.Build
 import android.os.SystemClock.uptimeMillis
+import android.util.AttributeSet
 import android.util.Log
 import android.view.Surface
 import android.view.SurfaceHolder
@@ -23,7 +24,8 @@ lateinit var engine: Game
  * Game engine for Rellorcs Edis.
  * @author Thomas Springfeldt
  */
-class Game(context: Context) : SurfaceView(context), Runnable, SurfaceHolder.Callback {
+class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context, attrs), Runnable,
+    SurfaceHolder.Callback {
 
     private val tag = "Game"
     init {
@@ -33,6 +35,7 @@ class Game(context: Context) : SurfaceView(context), Runnable, SurfaceHolder.Cal
     }
     private lateinit var gameThread : Thread
     @Volatile private var isRunning : Boolean = false
+    private var inputs = InputManager()
     private val camera = Viewport(screenWidth(), screenHeight(), 0.0f, 12.0f)
     private val level: LevelManager = LevelManager(TestLevel())
 
@@ -41,6 +44,14 @@ class Game(context: Context) : SurfaceView(context), Runnable, SurfaceHolder.Cal
     fun screenHeight() = context.resources.displayMetrics.heightPixels
     fun screenWidth() = context.resources.displayMetrics.widthPixels
     fun levelHeight() = level.levelHeight
+    fun setControls(control: InputManager) {
+        inputs.onPause() //give the previous controller
+        inputs.onStop() //a chance to clean up
+        inputs = control
+        inputs.onStart()
+    }
+
+    fun getControls() = inputs
 
     /**
      * Game loop.
@@ -103,6 +114,7 @@ class Game(context: Context) : SurfaceView(context), Runnable, SurfaceHolder.Cal
      */
     fun onPause() {
         Log.d(tag, "OnPause()")
+        inputs.onPause()
         isRunning = false
     }
 
@@ -111,6 +123,7 @@ class Game(context: Context) : SurfaceView(context), Runnable, SurfaceHolder.Cal
      */
     fun onResume() {
         Log.d(tag, "OnResume()")
+        inputs.onResume()
     }
 
     /**

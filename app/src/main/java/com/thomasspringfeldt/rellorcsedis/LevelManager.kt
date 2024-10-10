@@ -63,7 +63,7 @@ class LevelManager(data: LevelData) {
 
     private fun createEntity(spriteName: String, x: Float, y: Float) {
         if (spriteName == PLAYER) {
-            player = DynamicEntity(spriteName, x, y)
+            player = Player(spriteName, x, y)
             addEntity(player)
         } else {
             addEntity(StaticEntity(spriteName, x, y))

@@ -9,15 +9,17 @@ const val GRAVITY = 40f
  * Entity that can move.
  * @author Thomas Springfeldt
  */
-class DynamicEntity(spriteName: String, x: Float, y: Float) : StaticEntity(spriteName, x, y) {
+open class DynamicEntity(spriteName: String, x: Float, y: Float) : StaticEntity(spriteName, x, y) {
 
     var velX = 0f
     var velY = 0f
+    var isOnGround = false
 
     override fun update(deltaTime: Float) {
         super.update(deltaTime)
         moveHorizontally(deltaTime)
         moveVertically(deltaTime)
+        isOnGround = false
     }
 
     override fun onCollision(that: Entity) {
@@ -32,6 +34,7 @@ class DynamicEntity(spriteName: String, x: Float, y: Float) : StaticEntity(sprit
         if (overlap.y != 0f) {
             y += overlap.y
             velY = 0f
+            isOnGround = (overlap.y < 0)
         }
     }
 

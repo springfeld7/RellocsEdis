@@ -2,25 +2,26 @@ package com.thomasspringfeldt.rellorcsedis
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
-import androidx.core.view.WindowInsetsCompat
 
+/**
+ * Main activity.
+ * @author Thomas Springfeldt
+ */
 class MainActivity : AppCompatActivity() {
     private val tag = "MainActivity"
     private lateinit var game : Game
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d(tag, "MainActivity launched")
-        game = Game(this)
-        setContentView(game)
+        setContentView(R.layout.activity_main)
+        game = findViewById<Game>(R.id.game)
+        val input = TouchController(findViewById(R.id.touch_controller))
+        game.setControls(input)
     }
 
     override fun onPause() {
