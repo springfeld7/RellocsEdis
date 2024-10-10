@@ -124,7 +124,12 @@ object BitmapUtils {
         val matrix = Matrix()
         val centerX = source.width * 0.5f
         val centerY = source.height * 0.5f
-        matrix.postScale(if (horizontally) 1.0f else -1.0f, if (horizontally) -1.0f else 1.0f, centerX, centerY)
+        matrix.postScale(
+            if (horizontally) 1f else -1f,
+            if (horizontally) -1f else 1f,
+            centerX,
+            centerY
+        )
         return Bitmap.createBitmap(source, 0, 0, source.width, source.height, matrix, true)
     }
 

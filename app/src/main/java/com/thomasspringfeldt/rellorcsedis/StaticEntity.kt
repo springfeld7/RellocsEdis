@@ -17,8 +17,8 @@ open class StaticEntity(spriteName: String, x: Float, y: Float) : Entity() {
     init {
         this.x = x
         this.y = y
-        width = 1.0f
-        height = 1.0f
+        width = 1f
+        height = 1f
         bitmap = loadBitMap(spriteName)
     }
 

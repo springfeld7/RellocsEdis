@@ -1,14 +1,16 @@
 package com.thomasspringfeldt.rellorcsedis
 
-const val PLAYER_RUN_SPEED = 6.0f //meters per second
+const val PLAYER_RUN_SPEED = 6f //meters per second
 val PLAYER_JUMP_FORCE: Float = -(GRAVITY / 2f) //whatever feels good!
+const val LEFT = 1f
+const val RIGHT = -1f
 
 class Player(spriteName: String, x: Float, y: Float) :
     DynamicEntity(spriteName, x, y) {
 
     init {
-        width = 0.7f
-        height = 0.7f
+        width = 0.9f
+        height = 0.9f
         bitmap = loadBitMap(spriteName)
     }
 

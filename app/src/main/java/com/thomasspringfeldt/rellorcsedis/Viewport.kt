@@ -14,15 +14,15 @@ class Viewport(
     metersToShowY: Float
 ) : Entity() {
 
-    private var pixelsPerMeterX: Float = 0.0f
-    private var pixelsPerMeterY: Float = 0.0f
+    private var pixelsPerMeterX: Float = 0f
+    private var pixelsPerMeterY: Float = 0f
     private val screenCenterX = screenWidth / 2
     private val screenCenterY = screenHeight / 2
 
     init {
         require(metersToShowX > 0f || metersToShowY > 0f) { "One of the dimensions must be provided!" }
         setMetersToShow(metersToShowX, metersToShowY)
-        lookAt(2.0f, 0.0f) //default view target
+        lookAt(2f, 0f) //default view target
     }
 
     private fun setMetersToShow(metersToShowX: Float, metersToShowY: Float) {
