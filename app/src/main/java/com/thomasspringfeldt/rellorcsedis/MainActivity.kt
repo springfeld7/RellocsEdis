@@ -1,10 +1,16 @@
 package com.thomasspringfeldt.rellorcsedis
 
+import android.hardware.input.InputManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
+import android.view.InputDevice
+import android.view.KeyEvent
+import android.view.MotionEvent
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 
@@ -12,15 +18,18 @@ import androidx.core.view.WindowCompat
  * Main activity.
  * @author Thomas Springfeldt
  */
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), InputManager.InputDeviceListener {
+
     private val tag = "MainActivity"
     private lateinit var game : Game
+    private var gamepadListener: GamepadListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         game = findViewById<Game>(R.id.game)
-        val input = VirtualJoystick(findViewById(R.id.virtual_joystick))
+        //val input = VirtualJoystick(findViewById(R.id.virtual_joystick))
+        val input = Gamepad(this)
         game.setControls(input)
     }
 
@@ -30,13 +39,104 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onResume() {
+        Log.d(tag, "onResume");
         super.onResume()
+        if (isGameControllerConnected()) {
+            Toast.makeText(this, "Gamepad detected!", Toast.LENGTH_LONG).show();
+        }
         game.onResume()
     }
 
     override fun onDestroy() {
         game.onDestroy()
         super.onDestroy()
+    }
+
+    /* GAME PAD */
+    fun setGamepadListener(listener: GamepadListener?) {
+        gamepadListener = listener
+    }
+
+    override fun dispatchGenericMotionEvent(ev: MotionEvent): Boolean {
+        if (gamepadListener != null) {
+            if (gamepadListener!!.dispatchGenericMotionEvent(ev)) {
+                return true
+            }
+        }
+        return super.dispatchGenericMotionEvent(ev)
+    }
+
+    override fun dispatchKeyEvent(ev: KeyEvent): Boolean {
+        if (gamepadListener != null) {
+            if (gamepadListener!!.dispatchKeyEvent(ev)) {
+                return true
+            }
+        }
+        return super.dispatchKeyEvent(ev)
+    }
+
+    fun isGameControllerConnected(): Boolean {
+        val deviceIds = InputDevice.getDeviceIds()
+        for (deviceId in deviceIds) {
+            val dev = InputDevice.getDevice(deviceId)
+            val sources = dev?.sources
+            if (sources != null) {
+                if (sources and InputDevice.SOURCE_GAMEPAD == InputDevice.SOURCE_GAMEPAD ||
+                    sources and InputDevice.SOURCE_JOYSTICK == InputDevice.SOURCE_JOYSTICK
+                ) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+
+    override fun onInputDeviceAdded(p0: Int) {
+        val deviceIds = InputDevice.getDeviceIds()
+        for (deviceId in deviceIds) {
+            val dev = InputDevice.getDevice(deviceId)
+            val sources = dev?.sources
+            if (sources != null) {
+                if (sources and InputDevice.SOURCE_GAMEPAD == InputDevice.SOURCE_GAMEPAD ||
+                    sources and InputDevice.SOURCE_JOYSTICK == InputDevice.SOURCE_JOYSTICK
+                ) {
+                    Toast.makeText(this, "Input Device Added!", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+    }
+
+    override fun onInputDeviceRemoved(p0: Int) {
+        val deviceIds = InputDevice.getDeviceIds()
+        for (deviceId in deviceIds) {
+            val dev = InputDevice.getDevice(deviceId)
+            val sources = dev?.sources
+            if (sources != null) {
+                if (sources and InputDevice.SOURCE_GAMEPAD == InputDevice.SOURCE_GAMEPAD ||
+                    sources and InputDevice.SOURCE_JOYSTICK == InputDevice.SOURCE_JOYSTICK
+                ) {
+                    //probably pause the game and show some dialog
+                    Toast.makeText(this, "Input Device Removed!", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+    }
+
+    override fun onInputDeviceChanged(p0: Int) {
+        val deviceIds = InputDevice.getDeviceIds()
+        for (deviceId in deviceIds) {
+            val dev = InputDevice.getDevice(deviceId)
+            val sources = dev?.sources
+            if (sources != null) {
+                if (sources and InputDevice.SOURCE_GAMEPAD == InputDevice.SOURCE_GAMEPAD ||
+                    sources and InputDevice.SOURCE_JOYSTICK == InputDevice.SOURCE_JOYSTICK
+                ) {
+                    //probably pause the game and show some dialog
+                    Toast.makeText(this, "Input Device Changed!", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+
     }
 
     /* CODE FOR ENABLING FULLSCREEN */

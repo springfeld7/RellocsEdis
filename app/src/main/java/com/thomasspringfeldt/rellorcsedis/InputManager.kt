@@ -16,8 +16,8 @@ open class InputManager {
         horizontalFactor = clamp(horizontalFactor, MIN, MAX)
     }
 
-    fun onStart() {}
-    fun onStop() {}
-    fun onPause() {}
-    fun onResume() {}
+    open fun onStart() {}
+    open fun onStop() {}
+    open fun onPause() {}
+    open fun onResume() {}
 }
