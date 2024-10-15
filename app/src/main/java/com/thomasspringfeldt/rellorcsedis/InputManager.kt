@@ -16,6 +16,15 @@ open class InputManager {
         horizontalFactor = clamp(horizontalFactor, MIN, MAX)
     }
 
+    fun getMinInput(): Float {
+        return MIN
+    }
+
+    fun getMaxInput(): Float {
+        return MAX
+    }
+
+    open fun update(dt: Float) {}
     open fun onStart() {}
     open fun onStop() {}
     open fun onPause() {}
