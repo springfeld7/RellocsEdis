@@ -15,6 +15,7 @@ import android.view.SurfaceHolder
 import android.view.SurfaceView
 import kotlin.random.Random
 
+const val PREFS = "com.thomasspringfeldt.rellorcsedis"
 const val TARGET_FPS = 60f
 var RNG = Random(uptimeMillis())
 const val NANOS_TO_SECOND = 1f / 1000000000.0f
@@ -35,6 +36,7 @@ class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context,
     }
     private lateinit var gameThread : Thread
     @Volatile private var isRunning : Boolean = false
+    private val jukebox = Jukebox(this)
     private var inputs = InputManager()
     private val camera = Viewport(screenWidth(), screenHeight(), 0f, 12f)
     private val level: LevelManager = LevelManager(TestLevel())
@@ -50,8 +52,12 @@ class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context,
         inputs = control
         inputs.onStart()
     }
-
     fun getControls() = inputs
+    fun getActivity() = context as MainActivity
+    fun getAssets() = context.assets
+    fun getPreferences() = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
+    fun getPreferencesEditor() = getPreferences().edit()
+    fun savePreference(key: String, v: Boolean) = getPreferencesEditor().putBoolean(key, v).commit()
 
     /**
      * Game loop.
@@ -102,6 +108,11 @@ class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context,
         holder.unlockCanvasAndPost(canvas)
     }
 
+    fun onGameEvent(event: GameEvent, e: Entity? /*can be null!*/) {
+        //TODO: really should schedule these by adding to an list, avoiding duplicates, and then start all unique sounds once per frame.
+        jukebox.playEventSound(event);
+    }
+
     /**
      * Filters all level entities and returns only the visible ones.
      */
@@ -114,6 +125,7 @@ class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context,
      */
     fun onPause() {
         Log.d(tag, "OnPause()")
+        jukebox.pauseBgMusic()
         inputs.onPause()
         isRunning = false
     }
@@ -123,7 +135,9 @@ class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context,
      */
     fun onResume() {
         Log.d(tag, "OnResume()")
+        jukebox.resumeBgMusic()
         inputs.onResume()
+        isRunning = true
     }
 
     /**

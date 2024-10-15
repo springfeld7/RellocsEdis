@@ -26,6 +26,7 @@ class Player(spriteName: String, x: Float, y: Float) :
 
         if (controls.isJumping && isOnGround) {
             velY = PLAYER_JUMP_FORCE
+            engine.onGameEvent(GameEvent.Jump, this)
         }
         super.update(dt) //parent will integrate our velocity and time with our position
     }
@@ -47,4 +48,18 @@ class Player(spriteName: String, x: Float, y: Float) :
         }
         super.render(canvas, transform, paint)
     }
+
+    override fun onCollision(that: Entity) {
+        //Remove comment when Coin is implemented
+        /*
+        if(that is Coin) {
+            engine.onGameEvent(GameEvent.CoinPickup, this)
+            //the Game might count a score, play a sound effect, or render a graphical effect.
+            //the Coin's onCollision should set isDead = true, so the entity will stop updating,
+            // stop rendering, and can be removed at the end of the frame
+        }
+        */
+        super.onCollision(that)
+    }
+
 }
