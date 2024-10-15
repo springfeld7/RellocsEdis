@@ -5,7 +5,7 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 
-const val MAX_STICK_TRAVEL = 96
+const val MAX_STICK_TRAVEL = 64
 
 /**
  * Virtual joystick.

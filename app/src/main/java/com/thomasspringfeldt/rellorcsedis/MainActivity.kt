@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         game = findViewById<Game>(R.id.game)
-        val input = TouchController(findViewById(R.id.touch_controller))
+        val input = VirtualJoystick(findViewById(R.id.virtual_joystick))
         game.setControls(input)
     }
 
