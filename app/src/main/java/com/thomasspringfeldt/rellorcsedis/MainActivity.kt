@@ -28,8 +28,11 @@ class MainActivity : AppCompatActivity(), InputManager.InputDeviceListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         game = findViewById<Game>(R.id.game)
-        //val input = VirtualJoystick(findViewById(R.id.virtual_joystick))
-        val input = Gamepad(this)
+        val input = CompositeControl(
+            VirtualJoystick(findViewById(R.id.virtual_joystick)),
+            Gamepad(this)
+            //Accelerometer(this)
+        )
         game.setControls(input)
     }
 

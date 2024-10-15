@@ -1,6 +1,7 @@
 package com.thomasspringfeldt.rellorcsedis
 
 class CompositeControl(vararg inputs: InputManager) : InputManager() {
+
     private val inputs = ArrayList<InputManager>()
 
     init {
@@ -20,12 +21,12 @@ class CompositeControl(vararg inputs: InputManager) : InputManager() {
         addInput(im)
     }
 
-    override fun update(dt: Float) {
+    override fun update(deltaTime: Float) {
         isJumping = false
         horizontalFactor = 0f
         verticalFactor = 0f
         for (im in inputs) {
-            im.update(dt)
+            im.update(deltaTime)
             isJumping = isJumping || im.isJumping
             horizontalFactor += im.horizontalFactor
             verticalFactor += im.verticalFactor

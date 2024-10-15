@@ -65,7 +65,7 @@ class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context,
             //calculate the delta time
             //update all entities, passing in dt
             //handle input
-
+            inputs.update(deltaTime)
             update(deltaTime)
             render()
         }
