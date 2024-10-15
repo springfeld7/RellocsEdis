@@ -11,17 +11,16 @@ import androidx.core.math.MathUtils.clamp
 import kotlin.math.sqrt
 
 const val MAX_ANGLE = 30
+const val LENGTH = 3 //azimuth (z), pitch (z), roll (y)
+const val DEGREES_PER_RADIAN = 57.2957795f
+const val SHAKE_THRESHOLD = 3.25f // m/S^2
+const val SHAKE_COOLDOWN: Long = 300 //ms
 
 /**
  * Accelerometered game input.
  * @author Thomas Springfeldt
  */
 class Accelerometer(val activity: MainActivity) : InputManager() {
-
-    private val LENGTH = 3 //azimuth (z), pitch (z), roll (y)
-    private val DEGREES_PER_RADIAN = 57.2957795f
-    private val SHAKE_THRESHOLD = 3.25f // m/S^2
-    private val SHAKE_COOLDOWN: Long = 300 //ms
 
     private val lastAccels = FloatArray(LENGTH)
     private val lastMagFields = FloatArray(LENGTH)

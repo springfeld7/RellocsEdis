@@ -2,26 +2,26 @@ package com.thomasspringfeldt.rellorcsedis
 
 import androidx.core.math.MathUtils.clamp
 
-open class InputManager {
+const val MIN_INPUT = -1f
+const val MAX_INPUT = 1f
 
-    private val MIN = -1f
-    private val MAX = 1f
+open class InputManager {
 
     var verticalFactor = 0f
     var horizontalFactor = 0f
     var isJumping = false
 
     protected fun clampInputs() {
-        verticalFactor = clamp(verticalFactor, MIN, MAX)
-        horizontalFactor = clamp(horizontalFactor, MIN, MAX)
+        verticalFactor = clamp(verticalFactor, MIN_INPUT, MAX_INPUT)
+        horizontalFactor = clamp(horizontalFactor, MIN_INPUT, MAX_INPUT)
     }
 
     fun getMinInput(): Float {
-        return MIN
+        return MIN_INPUT
     }
 
     fun getMaxInput(): Float {
-        return MAX
+        return MAX_INPUT
     }
 
     open fun update(dt: Float) {}
