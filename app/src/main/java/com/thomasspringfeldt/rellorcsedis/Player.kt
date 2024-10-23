@@ -15,7 +15,8 @@ class Player(spriteName: String, x: Float, y: Float) :
     init {
         width = 0.9f
         height = 0.9f
-        bitmap = loadBitMap(spriteName)
+        engine.bitmapPool.remove(bitmap)
+        bitmap = engine.bitmapPool.createBitmap(spriteName, width, height)
     }
 
     override fun update(dt: Float) {

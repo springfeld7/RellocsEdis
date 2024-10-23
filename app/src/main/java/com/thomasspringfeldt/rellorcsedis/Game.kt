@@ -39,6 +39,7 @@ class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context,
     private val jukebox = Jukebox(this)
     private var inputs = InputManager()
     private val camera = Viewport(screenWidth(), screenHeight(), 0f, 12f)
+    val bitmapPool = BitmapPool(this)
     private val level: LevelManager = LevelManager(TestLevel())
 
     fun worldToScreenX(worldDistance: Float) = camera.worldToScreenX(worldDistance)
