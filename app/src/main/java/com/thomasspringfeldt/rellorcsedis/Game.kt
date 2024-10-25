@@ -40,7 +40,7 @@ class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context,
     private var inputs = InputManager()
     private val camera = Viewport(screenWidth(), screenHeight(), 0f, 12f)
     val bitmapPool = BitmapPool(this)
-    private val level: LevelManager = LevelManager(TestLevel())
+    private val level: LevelManager = LevelManager(Level1())
 
     fun worldToScreenX(worldDistance: Float) = camera.worldToScreenX(worldDistance)
     fun worldToScreenY(worldDistance: Float) = camera.worldToScreenY(worldDistance)
