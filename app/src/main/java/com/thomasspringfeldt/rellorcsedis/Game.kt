@@ -69,9 +69,6 @@ class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context,
         while(isRunning) {
             val deltaTime = (System.nanoTime() - lastFrame) * NANOS_TO_SECOND
             lastFrame = System.nanoTime()
-            //calculate the delta time
-            //update all entities, passing in dt
-            //handle input
             inputs.update(deltaTime)
             update(deltaTime)
             render()
@@ -82,7 +79,6 @@ class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context,
      * Updates game state.
      */
     private fun update(deltaTime: Float) {
-
         level.update(deltaTime)
         camera.lookAt(level.player)
     }

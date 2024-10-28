@@ -62,11 +62,17 @@ class LevelManager(data: LevelData) {
     }
 
     private fun createEntity(spriteName: String, x: Float, y: Float) {
-        if (spriteName == PLAYER) {
-            player = Player(spriteName, x, y)
-            addEntity(player)
-        } else {
-            addEntity(StaticEntity(spriteName, x, y))
+        when (spriteName) {
+            PLAYER -> {
+                player = Player(spriteName, x, y)
+                addEntity(player)
+            }
+            SPIKES -> {
+                addEntity(Spikes(spriteName, x, y))
+            }
+            else -> {
+                addEntity(StaticEntity(spriteName, x, y))
+            }
         }
     }
 }

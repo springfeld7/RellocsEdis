@@ -1,6 +1,6 @@
 package com.thomasspringfeldt.rellorcsedis
 
-const val PLAYER = "pink_left1"
+
 const val NULLSPRITE = "null_sprite"
 const val NO_TILE = 0
 

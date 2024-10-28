@@ -4,6 +4,7 @@ import android.graphics.Canvas
 import android.graphics.Matrix
 import android.graphics.Paint
 
+const val PLAYER = "pink_left1"
 const val PLAYER_RUN_SPEED = 6f //meters per second
 const val PLAYER_JUMP_FORCE: Float = -(GRAVITY / 2f) //whatever feels good!
 const val LEFT = 1f
@@ -54,6 +55,7 @@ class Player(spriteName: String, x: Float, y: Float) :
     }
 
     override fun onCollision(that: Entity) {
+
         //Remove comment when Coin is implemented
         /*
         if(that is Coin) {
