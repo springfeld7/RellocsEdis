@@ -1,5 +1,5 @@
 package com.thomasspringfeldt.rellorcsedis
 
 enum class GameEvent {
-    LevelStart, Jump, SpikesUpDown, CoinPickup, LevelGoal
+    LevelStart, Jump, SpikesUpDown, CoinPickup, LevelGoal, TakeDamage
 }

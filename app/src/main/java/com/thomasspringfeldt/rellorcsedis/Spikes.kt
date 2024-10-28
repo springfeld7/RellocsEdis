@@ -17,4 +17,8 @@ class Spikes(spriteName: String, x: Float, y: Float) :
         engine.bitmapPool.remove(bitmap)
         bitmap = engine.bitmapPool.createBitmap(spriteName, width, height)
     }
+
+    override fun onCollision(that: Entity) {
+        super.onCollision(that)
+    }
 }

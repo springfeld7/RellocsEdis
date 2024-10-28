@@ -43,7 +43,7 @@ open class DynamicEntity(spriteName: String, x: Float, y: Float) : StaticEntity(
         val deltaY = clamp(velY * deltaTime, -MAX_DELTA, MAX_DELTA)
         y += deltaY
         if (top > engine.levelHeight()) {
-            bottom = 1f
+            top = 0f
         }
     }
 

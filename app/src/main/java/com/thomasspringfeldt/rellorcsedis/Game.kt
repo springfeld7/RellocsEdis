@@ -107,7 +107,7 @@ class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context,
 
     fun onGameEvent(event: GameEvent, e: Entity? /*can be null!*/) {
         //TODO: really should schedule these by adding to an list, avoiding duplicates, and then start all unique sounds once per frame.
-        jukebox.playEventSound(event);
+        jukebox.playEventSound(event)
     }
 
     /**

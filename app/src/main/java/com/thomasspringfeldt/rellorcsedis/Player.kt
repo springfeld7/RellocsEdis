@@ -15,6 +15,7 @@ class Player(spriteName: String, x: Float, y: Float) :
 
     private var facing = RIGHT
     private var health = 3.0f
+    private var maxHealth = 3.0f
 
     init {
         width = 0.9f
@@ -65,6 +66,11 @@ class Player(spriteName: String, x: Float, y: Float) :
             // stop rendering, and can be removed at the end of the frame
         }
         */
+        if (that is Spikes) {
+            engine.onGameEvent(GameEvent.TakeDamage, this)
+            health -= that.damage
+
+        }
         super.onCollision(that)
     }
 
