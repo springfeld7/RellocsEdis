@@ -11,7 +11,10 @@ const val RIGHT = -1f
 
 class Player(spriteName: String, x: Float, y: Float) :
     DynamicEntity(spriteName, x, y) {
+
     private var facing = RIGHT
+    private var health = 3.0f
+
     init {
         width = 0.9f
         height = 0.9f
