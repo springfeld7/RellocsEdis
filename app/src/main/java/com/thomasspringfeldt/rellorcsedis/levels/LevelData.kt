@@ -12,6 +12,7 @@ abstract class LevelData {
 
     var tiles: Array<IntArray> = emptyArray()
     var tileToBitMap = HashMap<Int, String>()
+    var totalCoins = 0
 
     fun getRow(y: Int) : IntArray {
         return tiles[y]

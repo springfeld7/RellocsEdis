@@ -17,6 +17,8 @@ import com.thomasspringfeldt.rellorcsedis.entities.isColliding
 class LevelManager(data: LevelData) {
 
     lateinit var player: Player
+    var collectedCoins = 0
+    val totalCoins = data.totalCoins
     val entities = ArrayList<Entity>()
     private val entitiesToAdd = ArrayList<Entity>()
     private val entitiesToRemove = ArrayList<Entity>()
@@ -51,6 +53,7 @@ class LevelManager(data: LevelData) {
             }
             if (e is Coin) {
                 if (e.isDead) {
+                    collectedCoins += 1
                     removeEntity(e)
                 }
             }

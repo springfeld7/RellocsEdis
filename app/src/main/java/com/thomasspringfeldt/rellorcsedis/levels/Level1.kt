@@ -7,7 +7,11 @@ import com.thomasspringfeldt.rellorcsedis.entities.PLAYER
  * @author Thomas Springfeldt
  */
 class Level1 : LevelData() {
+
+
     init {
+        totalCoins = 3
+
         tileToBitMap[NO_TILE] = "no_tile"
         tileToBitMap[1] = PLAYER
         tileToBitMap[2] = "ground_left_round"
@@ -27,7 +31,7 @@ class Level1 : LevelData() {
             intArrayOf(9, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9),
             intArrayOf(9, 9, 11, 0, 1, 0, 0, 0, 0, 3, 4, 4, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9),
             intArrayOf(9, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9),
-            intArrayOf(9, 9, 0, 0, 0, 0, 0, 0, 10, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 10, 10, 10, 10, 0, 0, 0, 0, 0, 0, 0),
+            intArrayOf(9, 9, 0, 0, 0, 0, 0, 0, 10, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 10, 10, 10, 10, 0, 0, 0, 0, 0, 0, 11),
             intArrayOf(7, 9, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 8)
         )
     }

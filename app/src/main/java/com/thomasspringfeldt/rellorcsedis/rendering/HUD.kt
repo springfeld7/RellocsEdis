@@ -6,6 +6,8 @@ import android.graphics.Matrix
 import android.graphics.Paint
 import com.thomasspringfeldt.rellorcsedis.engine
 import com.thomasspringfeldt.rellorcsedis.entities.Entity
+import com.thomasspringfeldt.rellorcsedis.entities.Player
+import com.thomasspringfeldt.rellorcsedis.levels.LevelManager
 
 const val HUD_TEXT_SIZE = 64f
 const val HUD_TEXT_POS = 16f
@@ -14,7 +16,7 @@ const val HUD_TEXT_POS = 16f
  * HUD for game.
  * @author Thomas Springfeldt
  */
-class HUD : Entity() {
+class HUD(private val player: Player, private val level: LevelManager) : Entity() {
 
     override fun render(canvas: Canvas, transform: Matrix, paint: Paint) {
 
@@ -25,10 +27,11 @@ class HUD : Entity() {
         paint.textAlign = Paint.Align.LEFT
 
         if (!engine.isGameOver) {
-            val health = engine.player.health
-
+            val health = player.health
+            val collected = level.collectedCoins
+            val totalCoins = level.totalCoins
             canvas.drawText(health.toString(), textPosition, textSize, paint)
-            canvas.drawText("0/5", textPosition, textSize * 2, paint)
+            canvas.drawText("$collected/$totalCoins", textPosition, textSize * 2, paint)
         }
 
         super.render(canvas, transform, paint)

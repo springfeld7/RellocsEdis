@@ -51,7 +51,7 @@ class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context,
     val bitmapPool = BitmapPool(this)
     private var level: LevelManager = LevelManager(Level1())
     val player = level.player
-    private val hud = HUD()
+    private val hud = HUD(player, level)
 
     fun worldToScreenX(worldDistance: Float) = camera.worldToScreenX(worldDistance)
     fun worldToScreenY(worldDistance: Float) = camera.worldToScreenY(worldDistance)
