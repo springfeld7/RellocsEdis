@@ -1,14 +1,14 @@
 package com.thomasspringfeldt.rellorcsedis
 
 const val SPIKES = "spikes_down_brown"
-const val SPIKES_BITMAP_OFFSET = 0.6f
+const val SPIKES_TILE_OFFSET = 0.6f
 
 /**
  * Spikes, a static enemy.
  * @author Thomas Springfeldt
  */
 class Spikes(spriteName: String, x: Float, y: Float) :
-    StaticEntity(spriteName, x, y + SPIKES_BITMAP_OFFSET) {
+    StaticEntity(spriteName, x, y + SPIKES_TILE_OFFSET) {
 
     var damage = 1.0f;
 

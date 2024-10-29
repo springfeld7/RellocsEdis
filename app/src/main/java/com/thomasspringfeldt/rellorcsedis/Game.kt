@@ -25,8 +25,7 @@ lateinit var engine: Game
  * Game engine for Rellorcs Edis.
  * @author Thomas Springfeldt
  */
-class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context, attrs), Runnable,
-    SurfaceHolder.Callback {
+class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context, attrs), Runnable, SurfaceHolder.Callback {
 
     private val tag = "Game"
     init {
@@ -35,13 +34,14 @@ class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context,
         holder?.setFixedSize(screenWidth(), screenHeight())
     }
     private lateinit var gameThread : Thread
-    @Volatile private var isRunning : Boolean = false
+    @Volatile private var isRunning = false
+    private var isGameOver = false
     private val jukebox = Jukebox(this)
     private var inputs = InputManager()
     private val camera = Viewport(screenWidth(), screenHeight(), 0f, 12f)
     val bitmapPool = BitmapPool(this)
-    private val level: LevelManager = LevelManager(Level1())
-
+    private var level: LevelManager = LevelManager(Level1())
+    private val player = level.player
     fun worldToScreenX(worldDistance: Float) = camera.worldToScreenX(worldDistance)
     fun worldToScreenY(worldDistance: Float) = camera.worldToScreenY(worldDistance)
     fun screenHeight() = context.resources.displayMetrics.heightPixels
@@ -81,6 +81,7 @@ class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context,
     private fun update(deltaTime: Float) {
         level.update(deltaTime)
         camera.lookAt(level.player)
+        checkGameOver()
     }
 
     /**
@@ -103,6 +104,13 @@ class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context,
         }
 
         holder.unlockCanvasAndPost(canvas)
+    }
+
+    private fun checkGameOver() {
+        if (player.health <= 0) {
+            this.onGameEvent(GameEvent.GameOver, null)
+            player.respawn()
+        }
     }
 
     fun onGameEvent(event: GameEvent, e: Entity? /*can be null!*/) {

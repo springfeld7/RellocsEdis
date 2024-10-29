@@ -16,15 +16,20 @@ class Player(spriteName: String, x: Float, y: Float) :
     DynamicEntity(spriteName, x, y) {
 
     private var facing = RIGHT
-    private var health = 3.0f
+    var health = 3.0f
     private var maxHealth = 3.0f
 
     private var iFramesIsActive = false
     private var iFramesTimer : Long = 0
     private var isBlinking = false
     private var blinkTimer : Long = 0
+    private var startPosX = 0f
+    private var startPosY = 0f
+
 
     init {
+        startPosX = x
+        startPosY = y
         width = 0.9f
         height = 0.9f
         engine.bitmapPool.remove(bitmap)
@@ -84,6 +89,14 @@ class Player(spriteName: String, x: Float, y: Float) :
         super.onCollision(that)
     }
 
+    fun respawn() {
+        x = startPosX
+        y = startPosY
+        health = maxHealth
+        iFramesIsActive = false
+        isBlinking = false
+    }
+
     private fun getFacingDirection(direction: Float): Float {
         if (direction < 0f) {
             return LEFT
@@ -103,5 +116,4 @@ class Player(spriteName: String, x: Float, y: Float) :
             blinkTimer = System.currentTimeMillis()
         }
     }
-
 }

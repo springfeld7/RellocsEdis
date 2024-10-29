@@ -11,6 +11,10 @@ by Ulf Benjaminssson).
 
 - There is support for physical gamepad, accelerometer gamepad, and virtual joystick
 
+2 - Create a static "enemy"
+
+- Spikes has been implemented. 
+
 ---
 
 ## Pass With Distinction Achievements:

@@ -6,7 +6,7 @@ package com.thomasspringfeldt.rellorcsedis
  */
 class LevelManager(data: LevelData) {
 
-    lateinit var player: DynamicEntity
+    lateinit var player: Player
     val entities = ArrayList<Entity>()
     private val entitiesToAdd = ArrayList<Entity>()
     private val entitiesToRemove = ArrayList<Entity>()
@@ -69,6 +69,9 @@ class LevelManager(data: LevelData) {
             }
             SPIKES -> {
                 addEntity(Spikes(spriteName, x, y))
+            }
+            COIN -> {
+                addEntity(Coin(spriteName, x, y))
             }
             else -> {
                 addEntity(StaticEntity(spriteName, x, y))
