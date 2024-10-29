@@ -20,6 +20,7 @@ import com.thomasspringfeldt.rellorcsedis.levels.GameEvent
 import com.thomasspringfeldt.rellorcsedis.levels.Level1
 import com.thomasspringfeldt.rellorcsedis.levels.LevelManager
 import com.thomasspringfeldt.rellorcsedis.rendering.BitmapPool
+import com.thomasspringfeldt.rellorcsedis.rendering.HUD
 import com.thomasspringfeldt.rellorcsedis.rendering.Viewport
 import kotlin.random.Random
 
@@ -43,13 +44,15 @@ class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context,
     }
     private lateinit var gameThread : Thread
     @Volatile private var isRunning = false
-    private var isGameOver = false
+    var isGameOver = false
     private val jukebox = Jukebox(this)
     private var inputs = InputManager()
     private val camera = Viewport(screenWidth(), screenHeight(), 0f, 12f)
     val bitmapPool = BitmapPool(this)
     private var level: LevelManager = LevelManager(Level1())
-    private val player = level.player
+    val player = level.player
+    private val hud = HUD()
+
     fun worldToScreenX(worldDistance: Float) = camera.worldToScreenX(worldDistance)
     fun worldToScreenY(worldDistance: Float) = camera.worldToScreenY(worldDistance)
     fun screenHeight() = context.resources.displayMetrics.heightPixels
@@ -74,6 +77,7 @@ class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context,
     override fun run() {
         Log.d(tag, "run()")
         var lastFrame = System.nanoTime()
+        onGameEvent(GameEvent.LevelStart, player)
         while(isRunning) {
             val deltaTime = (System.nanoTime() - lastFrame) * NANOS_TO_SECOND
             lastFrame = System.nanoTime()
@@ -88,7 +92,7 @@ class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context,
      */
     private fun update(deltaTime: Float) {
         level.update(deltaTime)
-        camera.lookAt(level.player)
+        camera.lookAt(player)
         checkGameOver()
     }
 
@@ -110,6 +114,8 @@ class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context,
             transform.postTranslate(position.x, position.y)
             it.render(canvas, transform, paint)
         }
+
+        hud.render(canvas, transform, paint)
 
         holder.unlockCanvasAndPost(canvas)
     }
