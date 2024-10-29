@@ -19,6 +19,7 @@ class LevelManager(data: LevelData) {
     fun update(deltaTime: Float) {
         entities.forEach { it.update(deltaTime) }
         checkCollisions()
+        addAndRemoveEntities()
     }
 
     private fun checkCollisions() {
@@ -30,12 +31,28 @@ class LevelManager(data: LevelData) {
                 e.onCollision(player)
                 player.onCollision(e)
             }
+            for (e2 in entities) {
+                if (e2 == e) {
+                    continue
+                }
+                if (isColliding(e, e2)) {
+                    e.onCollision(e2)
+                }
+            }
+            if (e is Coin) {
+                if (e.isDead) {
+                    removeEntity(e)
+                }
+            }
         }
     }
 
     fun addAndRemoveEntities() {
         entities.removeAll(entitiesToRemove.toSet())
+        entitiesToRemove.clear()
+
         entities.addAll(entitiesToAdd)
+        entitiesToAdd.clear()
     }
 
     fun addEntity(entity: Entity) {

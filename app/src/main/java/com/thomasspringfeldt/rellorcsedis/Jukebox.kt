@@ -57,6 +57,7 @@ class Jukebox(val engine: Game) {
         loadEventSound(GameEvent.Jump, "sfx/jump.wav")
         loadEventSound(GameEvent.TakeDamage, "sfx/take_damage.wav")
         loadEventSound(GameEvent.GameOver, "sfx/gameover.wav")
+        loadEventSound(GameEvent.CoinPickup, "sfx/coin_pickup.wav")
     }
 
     private fun loadEventSound(event: GameEvent, fileName: String) {

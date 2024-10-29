@@ -65,15 +65,11 @@ class Player(spriteName: String, x: Float, y: Float) :
 
     override fun onCollision(that: Entity) {
 
-        //Remove comment when Coin is implemented
-        /*
         if(that is Coin) {
             engine.onGameEvent(GameEvent.CoinPickup, this)
-            //the Game might count a score, play a sound effect, or render a graphical effect.
             //the Coin's onCollision should set isDead = true, so the entity will stop updating,
             // stop rendering, and can be removed at the end of the frame
         }
-        */
 
         if (!iFramesIsActive) {
             if (that is Spikes) {

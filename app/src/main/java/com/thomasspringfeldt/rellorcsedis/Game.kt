@@ -93,7 +93,7 @@ class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context,
         val paint = Paint()
         var transform = Matrix()
         var position: PointF
-        //camera.lookAt(2.5f, 0.5f)
+
         val visible = buildVisibleSet()
 
         visible.forEach {
