@@ -9,11 +9,19 @@ by Ulf Benjaminssson).
 
 1 - Implement and support at least three controllers
 
-- There is support for physical gamepad, accelerometer gamepad, and virtual joystick
+- There is support for physical gamepad, accelerometer gamepad, and virtual joystick.
 
 2 - Create a static "enemy"
 
-- Spikes has been implemented. 
+- Spikes has been implemented.
+
+3 - Create a dynamic collectible Entity
+
+- A collectible coin has been added to the game.
+
+4 - Create a HUD
+
+- A HUD has been added that shows player health and collected and remaining coins.
 
 ---
 
