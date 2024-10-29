@@ -30,8 +30,8 @@ class HUD(private val player: Player, private val level: LevelManager) : Entity(
             val health = player.health
             val collected = level.collectedCoins
             val totalCoins = level.totalCoins
-            canvas.drawText(health.toString(), textPosition, textSize, paint)
-            canvas.drawText("$collected/$totalCoins", textPosition, textSize * 2, paint)
+            canvas.drawText("Health: $health", textPosition, textSize, paint)
+            canvas.drawText("Coins:  $collected/$totalCoins", textPosition, textSize * 2, paint)
         }
 
         super.render(canvas, transform, paint)
