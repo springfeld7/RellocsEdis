@@ -9,6 +9,8 @@ const val PLAYER_RUN_SPEED = 6f //meters per second
 const val PLAYER_JUMP_FORCE: Float = -(GRAVITY / 2f) //whatever feels good!
 const val LEFT = 1f
 const val RIGHT = -1f
+const val INVINCIBILITY_WINDOW = 1500
+const val BLINK_LENGTH = 150
 
 class Player(spriteName: String, x: Float, y: Float) :
     DynamicEntity(spriteName, x, y) {
@@ -16,6 +18,11 @@ class Player(spriteName: String, x: Float, y: Float) :
     private var facing = RIGHT
     private var health = 3.0f
     private var maxHealth = 3.0f
+
+    private var iFramesIsActive = false
+    private var iFramesTimer : Long = 0
+    private var isBlinking = false
+    private var blinkTimer : Long = 0
 
     init {
         width = 0.9f
@@ -34,16 +41,12 @@ class Player(spriteName: String, x: Float, y: Float) :
             velY = PLAYER_JUMP_FORCE
             engine.onGameEvent(GameEvent.Jump, this)
         }
-        super.update(dt) //parent will integrate our velocity and time with our position
-    }
 
-    private fun getFacingDirection(direction: Float): Float {
-        if (direction < 0f) {
-            return LEFT
-        } else if (direction > 0f) {
-            return RIGHT
+        if (iFramesIsActive) {
+            handleIFrames()
         }
-        return facing
+
+        super.update(dt) //parent will integrate our velocity and time with our position
     }
 
     override fun render(canvas: Canvas, transform: Matrix, paint: Paint) {
@@ -52,7 +55,7 @@ class Player(spriteName: String, x: Float, y: Float) :
             val offset = engine.worldToScreenX(width)
             transform.postTranslate(offset, 0.0f)
         }
-        super.render(canvas, transform, paint)
+        if (!isBlinking) {super.render(canvas, transform, paint)}
     }
 
     override fun onCollision(that: Entity) {
@@ -66,12 +69,39 @@ class Player(spriteName: String, x: Float, y: Float) :
             // stop rendering, and can be removed at the end of the frame
         }
         */
-        if (that is Spikes) {
-            engine.onGameEvent(GameEvent.TakeDamage, this)
-            health -= that.damage
 
+        if (!iFramesIsActive) {
+            if (that is Spikes) {
+                engine.onGameEvent(GameEvent.TakeDamage, this)
+                health -= that.damage
+                iFramesIsActive = true
+                iFramesTimer = System.currentTimeMillis()
+                isBlinking = true
+                blinkTimer = System.currentTimeMillis()
+            }
         }
+
         super.onCollision(that)
+    }
+
+    private fun getFacingDirection(direction: Float): Float {
+        if (direction < 0f) {
+            return LEFT
+        } else if (direction > 0f) {
+            return RIGHT
+        }
+        return facing
+    }
+
+    private fun handleIFrames() {
+        if (iFramesIsActive && System.currentTimeMillis() - iFramesTimer > INVINCIBILITY_WINDOW) {
+            iFramesIsActive = false
+            isBlinking = false
+        }
+        if (System.currentTimeMillis() - blinkTimer >= BLINK_LENGTH) {
+            isBlinking = !isBlinking
+            blinkTimer = System.currentTimeMillis()
+        }
     }
 
 }
