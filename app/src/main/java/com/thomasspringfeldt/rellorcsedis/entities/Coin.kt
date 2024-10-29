@@ -1,4 +1,6 @@
-package com.thomasspringfeldt.rellorcsedis
+package com.thomasspringfeldt.rellorcsedis.entities
+
+import com.thomasspringfeldt.rellorcsedis.engine
 
 const val COIN = "coin_yellow"
 const val COIN_SIDE_RATIO = 0.4f

@@ -1,4 +1,6 @@
-package com.thomasspringfeldt.rellorcsedis
+package com.thomasspringfeldt.rellorcsedis.levels
+
+import com.thomasspringfeldt.rellorcsedis.entities.PLAYER
 
 /**
  * A test level.

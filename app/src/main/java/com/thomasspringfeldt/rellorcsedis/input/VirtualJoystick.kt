@@ -1,9 +1,10 @@
-package com.thomasspringfeldt.rellorcsedis
+package com.thomasspringfeldt.rellorcsedis.input
 
 import android.content.res.Resources
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import com.thomasspringfeldt.rellorcsedis.R
 
 const val MAX_STICK_TRAVEL = 64
 

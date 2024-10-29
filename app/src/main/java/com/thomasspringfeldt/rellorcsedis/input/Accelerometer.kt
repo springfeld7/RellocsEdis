@@ -1,4 +1,4 @@
-package com.thomasspringfeldt.rellorcsedis
+package com.thomasspringfeldt.rellorcsedis.input
 
 import android.app.Activity
 import android.hardware.Sensor
@@ -8,6 +8,7 @@ import android.hardware.SensorManager
 import android.os.Build
 import android.view.Surface
 import androidx.core.math.MathUtils.clamp
+import com.thomasspringfeldt.rellorcsedis.MainActivity
 import kotlin.math.sqrt
 
 const val MAX_ANGLE = 30

@@ -1,10 +1,12 @@
-package com.thomasspringfeldt.rellorcsedis
+package com.thomasspringfeldt.rellorcsedis.audio
 
 import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.media.SoundPool
 import android.util.Log
+import com.thomasspringfeldt.rellorcsedis.Game
+import com.thomasspringfeldt.rellorcsedis.levels.GameEvent
 import java.io.IOException
 
 const val DEFAULT_SFX_VOLUME = 0.8f

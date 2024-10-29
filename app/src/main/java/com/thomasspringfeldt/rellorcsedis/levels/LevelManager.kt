@@ -1,4 +1,14 @@
-package com.thomasspringfeldt.rellorcsedis
+package com.thomasspringfeldt.rellorcsedis.levels
+
+import com.thomasspringfeldt.rellorcsedis.entities.COIN
+import com.thomasspringfeldt.rellorcsedis.entities.Coin
+import com.thomasspringfeldt.rellorcsedis.entities.Entity
+import com.thomasspringfeldt.rellorcsedis.entities.PLAYER
+import com.thomasspringfeldt.rellorcsedis.entities.Player
+import com.thomasspringfeldt.rellorcsedis.entities.SPIKES
+import com.thomasspringfeldt.rellorcsedis.entities.Spikes
+import com.thomasspringfeldt.rellorcsedis.entities.StaticEntity
+import com.thomasspringfeldt.rellorcsedis.entities.isColliding
 
 /**
  * Level manager.

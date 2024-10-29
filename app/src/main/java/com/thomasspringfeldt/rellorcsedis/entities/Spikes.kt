@@ -1,4 +1,6 @@
-package com.thomasspringfeldt.rellorcsedis
+package com.thomasspringfeldt.rellorcsedis.entities
+
+import com.thomasspringfeldt.rellorcsedis.engine
 
 const val SPIKES = "spikes_down_brown"
 const val SPIKES_TILE_OFFSET = 0.6f

@@ -1,4 +1,4 @@
-package com.thomasspringfeldt.rellorcsedis
+package com.thomasspringfeldt.rellorcsedis.input
 
 class CompositeControl(vararg inputs: InputManager) : InputManager() {
 

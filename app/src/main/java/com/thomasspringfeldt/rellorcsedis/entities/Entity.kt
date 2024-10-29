@@ -1,4 +1,4 @@
-package com.thomasspringfeldt.rellorcsedis
+package com.thomasspringfeldt.rellorcsedis.entities
 
 import android.graphics.Canvas
 import android.graphics.Matrix

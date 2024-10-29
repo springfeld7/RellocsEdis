@@ -1,8 +1,9 @@
-package com.thomasspringfeldt.rellorcsedis
+package com.thomasspringfeldt.rellorcsedis.input
 
 import android.view.InputDevice
 import android.view.KeyEvent
 import android.view.MotionEvent
+import com.thomasspringfeldt.rellorcsedis.MainActivity
 
 /**
  * Class for handling physical gamepads.

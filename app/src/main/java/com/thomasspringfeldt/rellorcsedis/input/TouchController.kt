@@ -1,9 +1,10 @@
-package com.thomasspringfeldt.rellorcsedis
+package com.thomasspringfeldt.rellorcsedis.input
 
 import android.annotation.SuppressLint
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
+import com.thomasspringfeldt.rellorcsedis.R
 
 @SuppressLint("ClickableViewAccessibility")
 class TouchController(view: View) : InputManager(), View.OnTouchListener {

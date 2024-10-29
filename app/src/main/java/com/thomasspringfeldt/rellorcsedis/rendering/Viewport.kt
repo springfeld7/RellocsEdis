@@ -1,6 +1,8 @@
-package com.thomasspringfeldt.rellorcsedis
+package com.thomasspringfeldt.rellorcsedis.rendering
 
 import android.graphics.PointF
+import com.thomasspringfeldt.rellorcsedis.entities.Entity
+import com.thomasspringfeldt.rellorcsedis.entities.isColliding
 import kotlin.math.round
 
 /**

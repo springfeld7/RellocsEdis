@@ -1,4 +1,4 @@
-package com.thomasspringfeldt.rellorcsedis
+package com.thomasspringfeldt.rellorcsedis.rendering
 
 import android.content.Context
 import android.content.res.Resources

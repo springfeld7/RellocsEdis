@@ -13,6 +13,10 @@ import android.view.WindowInsetsController
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
+import com.thomasspringfeldt.rellorcsedis.input.CompositeControl
+import com.thomasspringfeldt.rellorcsedis.input.Gamepad
+import com.thomasspringfeldt.rellorcsedis.input.GamepadListener
+import com.thomasspringfeldt.rellorcsedis.input.VirtualJoystick
 
 /**
  * Main activity.

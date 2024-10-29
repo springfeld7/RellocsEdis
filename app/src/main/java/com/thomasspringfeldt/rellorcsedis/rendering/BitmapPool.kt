@@ -1,8 +1,9 @@
-package com.thomasspringfeldt.rellorcsedis
+package com.thomasspringfeldt.rellorcsedis.rendering
 
 import android.graphics.Bitmap
 import android.util.Log
-import com.thomasspringfeldt.rellorcsedis.BitmapUtils.loadScaledBitmap
+import com.thomasspringfeldt.rellorcsedis.Game
+import com.thomasspringfeldt.rellorcsedis.rendering.BitmapUtils.loadScaledBitmap
 import kotlin.math.ceil
 
 class BitmapPool(private val engine: Game) {

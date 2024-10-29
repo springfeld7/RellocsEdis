@@ -1,6 +1,7 @@
-package com.thomasspringfeldt.rellorcsedis
+package com.thomasspringfeldt.rellorcsedis.entities
 
 import androidx.core.math.MathUtils.clamp
+import com.thomasspringfeldt.rellorcsedis.engine
 
 const val MAX_DELTA = 0.49f
 const val GRAVITY = 40f

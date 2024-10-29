@@ -1,4 +1,4 @@
-package com.thomasspringfeldt.rellorcsedis
+package com.thomasspringfeldt.rellorcsedis.levels
 
 
 const val NULLSPRITE = "null_sprite"

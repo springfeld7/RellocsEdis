@@ -1,9 +1,10 @@
-package com.thomasspringfeldt.rellorcsedis
+package com.thomasspringfeldt.rellorcsedis.entities
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Matrix
 import android.graphics.Paint
+import com.thomasspringfeldt.rellorcsedis.engine
 
 /**
  * Entity class for static, concrete, sprites.
