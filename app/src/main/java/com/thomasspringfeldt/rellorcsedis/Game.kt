@@ -18,6 +18,7 @@ import com.thomasspringfeldt.rellorcsedis.entities.Entity
 import com.thomasspringfeldt.rellorcsedis.input.InputManager
 import com.thomasspringfeldt.rellorcsedis.levels.GameEvent
 import com.thomasspringfeldt.rellorcsedis.levels.Level1
+import com.thomasspringfeldt.rellorcsedis.levels.Level2
 import com.thomasspringfeldt.rellorcsedis.levels.LevelManager
 import com.thomasspringfeldt.rellorcsedis.rendering.BitmapPool
 import com.thomasspringfeldt.rellorcsedis.rendering.HUD
@@ -50,8 +51,8 @@ class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context,
     private val camera = Viewport(screenWidth(), screenHeight(), 0f, 12f)
     val bitmapPool = BitmapPool(this)
     private var level: LevelManager = LevelManager(Level1())
-    val player = level.player
-    private val hud = HUD(player, level)
+    var player = level.player
+    private var hud = HUD(player, level)
 
     fun worldToScreenX(worldDistance: Float) = camera.worldToScreenX(worldDistance)
     fun worldToScreenY(worldDistance: Float) = camera.worldToScreenY(worldDistance)
@@ -103,7 +104,7 @@ class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context,
         val canvas = holder?.lockCanvas() ?: return
         canvas.drawColor(Color.CYAN)
         val paint = Paint()
-        var transform = Matrix()
+        val transform = Matrix()
         var position: PointF
 
         val visible = buildVisibleSet()
@@ -118,6 +119,16 @@ class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context,
         hud.render(canvas, transform, paint)
 
         holder.unlockCanvasAndPost(canvas)
+    }
+
+
+    fun loadNextLevel() {
+        level = LevelManager(Level2())
+        player = level.player
+        hud = HUD(player, level)
+
+        jukebox.unloadMusic()
+
     }
 
     private fun checkGameOver() {

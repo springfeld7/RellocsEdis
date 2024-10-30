@@ -3,6 +3,8 @@ package com.thomasspringfeldt.rellorcsedis.levels
 import com.thomasspringfeldt.rellorcsedis.entities.COIN
 import com.thomasspringfeldt.rellorcsedis.entities.Coin
 import com.thomasspringfeldt.rellorcsedis.entities.Entity
+import com.thomasspringfeldt.rellorcsedis.entities.GOAL
+import com.thomasspringfeldt.rellorcsedis.entities.Goal
 import com.thomasspringfeldt.rellorcsedis.entities.PLAYER
 import com.thomasspringfeldt.rellorcsedis.entities.Player
 import com.thomasspringfeldt.rellorcsedis.entities.SPIKES
@@ -44,7 +46,7 @@ class LevelManager(data: LevelData) {
                 player.onCollision(e)
             }
             for (e2 in entities) {
-                if (e2 == e) {
+                if (e2 == e || e2 == player) {
                     continue
                 }
                 if (isColliding(e, e2)) {
@@ -57,6 +59,7 @@ class LevelManager(data: LevelData) {
                     removeEntity(e)
                 }
             }
+
         }
     }
 
@@ -102,6 +105,9 @@ class LevelManager(data: LevelData) {
             }
             COIN -> {
                 addEntity(Coin(spriteName, x, y))
+            }
+            GOAL-> {
+                addEntity(Goal(spriteName, x, y))
             }
             else -> {
                 addEntity(StaticEntity(spriteName, x, y))
