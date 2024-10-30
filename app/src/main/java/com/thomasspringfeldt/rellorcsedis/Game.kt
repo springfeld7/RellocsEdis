@@ -5,7 +5,6 @@ import android.graphics.Color
 import android.graphics.Matrix
 import android.graphics.Paint
 import android.graphics.PointF
-
 import android.os.Build
 import android.os.SystemClock.uptimeMillis
 import android.util.AttributeSet
@@ -15,11 +14,11 @@ import android.view.SurfaceHolder
 import android.view.SurfaceView
 import com.thomasspringfeldt.rellorcsedis.audio.Jukebox
 import com.thomasspringfeldt.rellorcsedis.entities.Entity
+import com.thomasspringfeldt.rellorcsedis.gamedata.GameEvent
+import com.thomasspringfeldt.rellorcsedis.gamedata.LevelManager
+import com.thomasspringfeldt.rellorcsedis.gamedata.levels.Level1
+import com.thomasspringfeldt.rellorcsedis.gamedata.levels.Level2
 import com.thomasspringfeldt.rellorcsedis.input.InputManager
-import com.thomasspringfeldt.rellorcsedis.levels.GameEvent
-import com.thomasspringfeldt.rellorcsedis.levels.Level1
-import com.thomasspringfeldt.rellorcsedis.levels.Level2
-import com.thomasspringfeldt.rellorcsedis.levels.LevelManager
 import com.thomasspringfeldt.rellorcsedis.rendering.BitmapPool
 import com.thomasspringfeldt.rellorcsedis.rendering.HUD
 import com.thomasspringfeldt.rellorcsedis.rendering.Viewport
@@ -127,7 +126,10 @@ class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context,
         player = level.player
         hud = HUD(player, level)
 
-        jukebox.unloadMusic()
+        jukebox.resetBgMusicPlayer()
+        jukebox.loadMusic("bgm/bgm_2.wav")
+        jukebox.resumeBgMusic()
+        onGameEvent(GameEvent.LevelGoal, null)
 
     }
 

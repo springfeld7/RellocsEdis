@@ -4,8 +4,8 @@ import android.graphics.Canvas
 import android.graphics.Matrix
 import android.graphics.Paint
 import com.thomasspringfeldt.rellorcsedis.engine
+import com.thomasspringfeldt.rellorcsedis.gamedata.GameEvent
 import com.thomasspringfeldt.rellorcsedis.input.InputManager
-import com.thomasspringfeldt.rellorcsedis.levels.GameEvent
 
 const val PLAYER = "pink_left1"
 const val PLAYER_RUN_SPEED = 6f //meters per second

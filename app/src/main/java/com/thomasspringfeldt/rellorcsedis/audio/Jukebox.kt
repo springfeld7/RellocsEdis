@@ -6,7 +6,7 @@ import android.media.MediaPlayer
 import android.media.SoundPool
 import android.util.Log
 import com.thomasspringfeldt.rellorcsedis.Game
-import com.thomasspringfeldt.rellorcsedis.levels.GameEvent
+import com.thomasspringfeldt.rellorcsedis.gamedata.GameEvent
 import java.io.IOException
 
 const val DEFAULT_SFX_VOLUME = 0.8f
@@ -41,7 +41,7 @@ class Jukebox(val engine: Game) {
             loadSounds()
         }
         if (mMusicEnabled) {
-            loadMusic()
+            loadMusic("bgm/bgm_1.wav")
         }
     }
 
@@ -61,6 +61,7 @@ class Jukebox(val engine: Game) {
         loadEventSound(GameEvent.GameOver, "sfx/gameover.wav")
         loadEventSound(GameEvent.CoinPickup, "sfx/coin_pickup.wav")
         loadEventSound(GameEvent.LevelStart, "sfx/level_start.wav")
+        loadEventSound(GameEvent.LevelGoal, "sfx/level_goal.wav")
     }
 
     private fun loadEventSound(event: GameEvent, fileName: String) {
@@ -101,10 +102,10 @@ class Jukebox(val engine: Game) {
         }
     }
 
-    private fun loadMusic() {
+    fun loadMusic(path: String) {
         try {
             mBgPlayer = MediaPlayer()
-            val afd = engine.getAssets().openFd("bgm/bgm_1.wav")
+            val afd = engine.getAssets().openFd(path)
             mBgPlayer!!.setDataSource(
                 afd.fileDescriptor,
                 afd.startOffset,
@@ -132,7 +133,14 @@ class Jukebox(val engine: Game) {
         mBgPlayer!!.start()
     }
 
-    private fun unloadMusic() {
+    fun resetBgMusicPlayer() {
+        if (mBgPlayer == null) {
+            return
+        }
+        mBgPlayer!!.reset()
+    }
+
+    fun unloadMusic() {
         if (mBgPlayer == null) {
             return
         }

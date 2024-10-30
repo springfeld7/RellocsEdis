@@ -7,7 +7,7 @@ import android.graphics.Paint
 import com.thomasspringfeldt.rellorcsedis.engine
 import com.thomasspringfeldt.rellorcsedis.entities.Entity
 import com.thomasspringfeldt.rellorcsedis.entities.Player
-import com.thomasspringfeldt.rellorcsedis.levels.LevelManager
+import com.thomasspringfeldt.rellorcsedis.gamedata.LevelManager
 
 const val HUD_TEXT_SIZE = 64f
 const val HUD_TEXT_POS = 16f
