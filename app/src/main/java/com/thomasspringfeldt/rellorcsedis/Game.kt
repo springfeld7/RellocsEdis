@@ -50,9 +50,11 @@ class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context,
     private val camera = Viewport(screenWidth(), screenHeight(), 0f, 12f)
     val bitmapPool = BitmapPool(this)
     private var level: LevelManager = LevelManager(Level1())
-    var player = level.player
+    private var player = level.player
     private var hud = HUD(player, level)
 
+    fun addEntity(entity: Entity) = level.addEntity(entity)
+    fun removeEntity(entity: Entity) = level.removeEntity(entity)
     fun worldToScreenX(worldDistance: Float) = camera.worldToScreenX(worldDistance)
     fun worldToScreenY(worldDistance: Float) = camera.worldToScreenY(worldDistance)
     fun screenHeight() = context.resources.displayMetrics.heightPixels
@@ -122,14 +124,22 @@ class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context,
 
 
     fun loadNextLevel() {
+        onGameEvent(GameEvent.LevelGoal, null)
+        val timer = System.currentTimeMillis()
+        while (System.currentTimeMillis() - timer < 5400) {
+
+        }
+        System.currentTimeMillis()
         level = LevelManager(Level2())
         player = level.player
         hud = HUD(player, level)
 
+        onGameEvent(GameEvent.LevelStart, null)
+
         jukebox.resetBgMusicPlayer()
         jukebox.loadMusic("bgm/bgm_2.wav")
         jukebox.resumeBgMusic()
-        onGameEvent(GameEvent.LevelGoal, null)
+
 
     }
 
