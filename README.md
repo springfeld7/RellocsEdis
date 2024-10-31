@@ -39,12 +39,18 @@ by Ulf Benjaminssson).
 
 1 - Implement player win
 
-- level goals are implemented (reaching the yellow box at the end of the level)
-- a second level is added, clearing it will take the player to level 1
+- Level goals are implemented (reaching the yellow box at the end of the level)
+- A second level is added, clearing it will take the player to level 1
+
+2 - Add 2 different power ups to the game
+
+- SpaceJump added. Makes the player jump really high, wearing a space suit.
+- Invincibility added. Makes the player invulnerable.
 
 ---
 
 ## Asset Credits:
 
 - sprites - https://opengameart.org/content/platform-pack
+- powerup sprites - https://opengameart.org/content/shining-coin-shining-health-shining-power-up-sprite-sheets
 - sfx and bgm - Thomas Springfeldt
