@@ -66,6 +66,7 @@ class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context,
         inputs = control
         inputs.onStart()
     }
+    fun getPlayer() = player
     fun getControls() = inputs
     fun getActivity() = context as MainActivity
     fun getAssets() = context.assets
@@ -118,7 +119,6 @@ class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context,
         }
 
         hud.render(canvas, transform, paint)
-
         holder.unlockCanvasAndPost(canvas)
     }
 

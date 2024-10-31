@@ -1,12 +1,12 @@
 package com.thomasspringfeldt.rellorcsedis.gamedata
 
 import com.thomasspringfeldt.rellorcsedis.engine
-import com.thomasspringfeldt.rellorcsedis.entities.COIN
 import com.thomasspringfeldt.rellorcsedis.entities.GOAL
-import com.thomasspringfeldt.rellorcsedis.entities.INVINCIBILITY
 import com.thomasspringfeldt.rellorcsedis.entities.PLAYER
 import com.thomasspringfeldt.rellorcsedis.entities.SPIKES
-import com.thomasspringfeldt.rellorcsedis.entities.SUPER_JUMP
+import com.thomasspringfeldt.rellorcsedis.entities.collectibles.COIN
+import com.thomasspringfeldt.rellorcsedis.entities.collectibles.INVINCIBILITY
+import com.thomasspringfeldt.rellorcsedis.entities.collectibles.SUPER_JUMP
 import java.io.IOException
 
 
@@ -47,6 +47,15 @@ open class Level(levelNumber: Int) {
         tileToBitMap[13] = GOAL
         tileToBitMap[14] = INVINCIBILITY
         tileToBitMap[15] = SUPER_JUMP
+        tileToBitMap[16] = "ground_yellow_left_round"
+        tileToBitMap[17] = "ground_yellow_left"
+        tileToBitMap[18] = "ground_yellow"
+        tileToBitMap[19] = "ground_yellow_round"
+        tileToBitMap[20] = "ground_yellow_right_round"
+        tileToBitMap[21] = "ground_yellow_right"
+        tileToBitMap[22] = "mud_yellow_left"
+        tileToBitMap[23] = "mud_yellow_right"
+        tileToBitMap[24] = "mud_yellow"
     }
 
     /**

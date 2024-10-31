@@ -46,7 +46,9 @@ open class DynamicEntity(spriteName: String, x: Float, y: Float) : StaticEntity(
         val deltaY = clamp(velY * deltaTime, -MAX_DELTA, MAX_DELTA)
         y += deltaY
         if (top > engine.levelHeight()) {
-            bottom = -5f
+            if (this is Player) {
+                health = 0f
+            }
         }
     }
 

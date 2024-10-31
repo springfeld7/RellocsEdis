@@ -20,8 +20,8 @@ class Player(spriteName: String, x: Float, y: Float) :
 
     private var facing = RIGHT
     var health = 3.0f
-    private var maxHealth = 3.0f
-
+    var maxHealth = 3.0f
+    var jumpForce = PLAYER_JUMP_FORCE
     private var iFramesIsActive = false
     private var iFramesTimer : Long = 0
     private var isBlinking = false
@@ -46,7 +46,7 @@ class Player(spriteName: String, x: Float, y: Float) :
         facing = getFacingDirection(direction)
 
         if (controls.isJumping && isOnGround) {
-            velY = PLAYER_JUMP_FORCE
+            velY = jumpForce
             engine.onGameEvent(GameEvent.Jump, this)
         }
 
@@ -67,10 +67,6 @@ class Player(spriteName: String, x: Float, y: Float) :
     }
 
     override fun onCollision(that: Entity) {
-
-        if(that is Coin) {
-            engine.onGameEvent(GameEvent.CoinPickup, this)
-        }
 
         if (!iFramesIsActive) {
             if (that is Spikes) {
