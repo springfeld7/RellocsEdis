@@ -16,7 +16,7 @@ import com.thomasspringfeldt.rellorcsedis.entities.isColliding
  * Level manager.
  * @author Thomas Springfeldt
  */
-class LevelManager(data: LevelData) {
+class LevelManager(data: Level) {
 
     lateinit var player: Player
     var collectedCoins = 0
@@ -79,7 +79,7 @@ class LevelManager(data: LevelData) {
         entitiesToRemove.add(entity)
     }
 
-    fun loadAssets(data: LevelData) {
+    fun loadAssets(data: Level) {
         for (y in 0 until data.height()) {
             val row = data.getRow(y)
             for (x in 0 until row.size) {

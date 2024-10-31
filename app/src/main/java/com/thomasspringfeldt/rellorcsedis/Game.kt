@@ -15,9 +15,8 @@ import android.view.SurfaceView
 import com.thomasspringfeldt.rellorcsedis.audio.Jukebox
 import com.thomasspringfeldt.rellorcsedis.entities.Entity
 import com.thomasspringfeldt.rellorcsedis.gamedata.GameEvent
+import com.thomasspringfeldt.rellorcsedis.gamedata.Level
 import com.thomasspringfeldt.rellorcsedis.gamedata.LevelManager
-import com.thomasspringfeldt.rellorcsedis.gamedata.levels.Level1
-import com.thomasspringfeldt.rellorcsedis.gamedata.levels.Level2
 import com.thomasspringfeldt.rellorcsedis.input.InputManager
 import com.thomasspringfeldt.rellorcsedis.rendering.BitmapPool
 import com.thomasspringfeldt.rellorcsedis.rendering.HUD
@@ -49,7 +48,8 @@ class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context,
     private var inputs = InputManager()
     private val camera = Viewport(screenWidth(), screenHeight(), 0f, 12f)
     val bitmapPool = BitmapPool(this)
-    private var level: LevelManager = LevelManager(Level1())
+    private var nextLevel = 1
+    private var level: LevelManager = LevelManager(Level(nextLevel))
     private var player = level.player
     private var hud = HUD(player, level)
 
@@ -129,8 +129,8 @@ class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context,
         while (System.currentTimeMillis() - timer < 5400) {
 
         }
-        System.currentTimeMillis()
-        level = LevelManager(Level2())
+        nextLevel++
+        level = LevelManager(Level(nextLevel))
         player = level.player
         hud = HUD(player, level)
 
