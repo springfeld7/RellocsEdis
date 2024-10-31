@@ -3,8 +3,10 @@ package com.thomasspringfeldt.rellorcsedis.gamedata
 import com.thomasspringfeldt.rellorcsedis.engine
 import com.thomasspringfeldt.rellorcsedis.entities.COIN
 import com.thomasspringfeldt.rellorcsedis.entities.GOAL
+import com.thomasspringfeldt.rellorcsedis.entities.INVINCIBILITY
 import com.thomasspringfeldt.rellorcsedis.entities.PLAYER
 import com.thomasspringfeldt.rellorcsedis.entities.SPIKES
+import com.thomasspringfeldt.rellorcsedis.entities.SUPER_JUMP
 import java.io.IOException
 
 
@@ -43,7 +45,8 @@ open class Level(levelNumber: Int) {
         tileToBitMap[11] = SPIKES
         tileToBitMap[12] = COIN
         tileToBitMap[13] = GOAL
-
+        tileToBitMap[14] = INVINCIBILITY
+        tileToBitMap[15] = SUPER_JUMP
     }
 
     /**

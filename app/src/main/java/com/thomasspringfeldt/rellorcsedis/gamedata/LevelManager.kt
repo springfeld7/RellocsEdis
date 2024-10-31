@@ -2,14 +2,19 @@ package com.thomasspringfeldt.rellorcsedis.gamedata
 
 import com.thomasspringfeldt.rellorcsedis.entities.COIN
 import com.thomasspringfeldt.rellorcsedis.entities.Coin
+import com.thomasspringfeldt.rellorcsedis.entities.Collectible
 import com.thomasspringfeldt.rellorcsedis.entities.Entity
 import com.thomasspringfeldt.rellorcsedis.entities.GOAL
 import com.thomasspringfeldt.rellorcsedis.entities.Goal
+import com.thomasspringfeldt.rellorcsedis.entities.INVINCIBILITY
+import com.thomasspringfeldt.rellorcsedis.entities.Invincibility
 import com.thomasspringfeldt.rellorcsedis.entities.PLAYER
 import com.thomasspringfeldt.rellorcsedis.entities.Player
 import com.thomasspringfeldt.rellorcsedis.entities.SPIKES
+import com.thomasspringfeldt.rellorcsedis.entities.SUPER_JUMP
 import com.thomasspringfeldt.rellorcsedis.entities.Spikes
 import com.thomasspringfeldt.rellorcsedis.entities.StaticEntity
+import com.thomasspringfeldt.rellorcsedis.entities.SuperJump
 import com.thomasspringfeldt.rellorcsedis.entities.isColliding
 
 /**
@@ -56,6 +61,10 @@ class LevelManager(data: Level) {
             if (e is Coin) {
                 if (e.isDead) {
                     collectedCoins += 1
+                }
+            }
+            if (e is Collectible) {
+                if (e.isDead) {
                     removeEntity(e)
                 }
             }
@@ -108,6 +117,12 @@ class LevelManager(data: Level) {
             }
             GOAL-> {
                 addEntity(Goal(spriteName, x, y))
+            }
+            INVINCIBILITY -> {
+                addEntity(Invincibility(spriteName, x, y))
+            }
+            SUPER_JUMP -> {
+                addEntity(SuperJump(spriteName, x, y))
             }
             else -> {
                 addEntity(StaticEntity(spriteName, x, y))
