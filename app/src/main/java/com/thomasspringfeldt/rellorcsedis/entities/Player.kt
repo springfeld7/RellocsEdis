@@ -22,10 +22,11 @@ class Player(spriteName: String, x: Float, y: Float) :
     var health = 3.0f
     var maxHealth = 3.0f
     var jumpForce = PLAYER_JUMP_FORCE
-    private var iFramesIsActive = false
-    private var iFramesTimer : Long = 0
-    private var isBlinking = false
-    private var blinkTimer : Long = 0
+    var isInvincible = false
+    var iFramesIsActive = false
+    var iFramesTimer : Long = 0
+    var isBlinking = false
+    var blinkTimer : Long = 0
     private var startPosX = 0f
     private var startPosY = 0f
 
@@ -51,7 +52,7 @@ class Player(spriteName: String, x: Float, y: Float) :
         }
 
         if (iFramesIsActive) {
-            handleIFrames()
+            handleIFrames(IFRAMES_DURATION)
         }
 
         super.update(dt) //parent will integrate our velocity and time with our position
@@ -68,7 +69,7 @@ class Player(spriteName: String, x: Float, y: Float) :
 
     override fun onCollision(that: Entity) {
 
-        if (!iFramesIsActive) {
+        if (!iFramesIsActive && !isInvincible) {
             if (that is Spikes) {
                 engine.onGameEvent(GameEvent.TakeDamage, this)
                 health -= that.damage
@@ -99,8 +100,8 @@ class Player(spriteName: String, x: Float, y: Float) :
         return facing
     }
 
-    private fun handleIFrames() {
-        if (iFramesIsActive && System.currentTimeMillis() - iFramesTimer > IFRAMES_DURATION) {
+    fun handleIFrames(duration: Int) {
+        if (iFramesIsActive && System.currentTimeMillis() - iFramesTimer > duration) {
             iFramesIsActive = false
             isBlinking = false
         }
