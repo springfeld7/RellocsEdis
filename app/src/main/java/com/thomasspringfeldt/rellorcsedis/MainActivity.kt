@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity(), InputManager.InputDeviceListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        game = findViewById<Game>(R.id.game)
+        game = findViewById(R.id.game)
         val input = CompositeControl(
             VirtualJoystick(findViewById(R.id.virtual_joystick)),
             Gamepad(this)
@@ -46,10 +46,10 @@ class MainActivity : AppCompatActivity(), InputManager.InputDeviceListener {
     }
 
     override fun onResume() {
-        Log.d(tag, "onResume");
+        Log.d(tag, "onResume")
         super.onResume()
         if (isGameControllerConnected()) {
-            Toast.makeText(this, "Gamepad detected!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Gamepad detected!", Toast.LENGTH_LONG).show()
         }
         game.onResume()
     }
@@ -73,16 +73,16 @@ class MainActivity : AppCompatActivity(), InputManager.InputDeviceListener {
         return super.dispatchGenericMotionEvent(ev)
     }
 
-    override fun dispatchKeyEvent(ev: KeyEvent): Boolean {
+    override fun dispatchKeyEvent(event: KeyEvent): Boolean {
         if (gamepadListener != null) {
-            if (gamepadListener!!.dispatchKeyEvent(ev)) {
+            if (gamepadListener!!.dispatchKeyEvent(event)) {
                 return true
             }
         }
-        return super.dispatchKeyEvent(ev)
+        return super.dispatchKeyEvent(event)
     }
 
-    fun isGameControllerConnected(): Boolean {
+    private fun isGameControllerConnected(): Boolean {
         val deviceIds = InputDevice.getDeviceIds()
         for (deviceId in deviceIds) {
             val dev = InputDevice.getDevice(deviceId)

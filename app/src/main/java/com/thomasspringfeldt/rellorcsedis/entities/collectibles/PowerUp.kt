@@ -12,7 +12,7 @@ const val POWER_UP_TILE_OFFSET = 0.5f - POWERUP_SIDE / 2
  * Base class for PowerUps.
  * @author Thomas Springfeldt
  */
-abstract class PowerUp(spriteName: String, x: Float, y: Float, val duration: Int) : Collectible(spriteName, x + POWER_UP_TILE_OFFSET, y) {
+abstract class PowerUp(spriteName: String, x: Float, y: Float, val pwrUpDuration: Int) : Collectible(spriteName, x + POWER_UP_TILE_OFFSET, y) {
 
     lateinit var owner: Player
     var timer: Long = 0

@@ -24,7 +24,7 @@ open class InputManager {
         return MAX_INPUT
     }
 
-    open fun update(dt: Float) {}
+    open fun update(deltaTime: Float) {}
     open fun onStart() {}
     open fun onStop() {}
     open fun onPause() {}

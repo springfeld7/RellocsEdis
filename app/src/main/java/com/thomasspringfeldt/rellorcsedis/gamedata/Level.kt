@@ -23,7 +23,7 @@ private const val LEVEL_2 = "level_files/level2.txt"
 open class Level(levelNumber: Int) {
 
     private lateinit var tiles: ArrayList<IntArray>
-    var tileToBitMap = HashMap<Int, String>()
+    private var tileToBitMap = HashMap<Int, String>()
     var totalCoins = 0
 
     init {

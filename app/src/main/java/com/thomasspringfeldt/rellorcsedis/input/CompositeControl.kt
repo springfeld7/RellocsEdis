@@ -10,7 +10,7 @@ class CompositeControl(vararg inputs: InputManager) : InputManager() {
         }
     }
 
-    fun addInput(im: InputManager) {
+    private fun addInput(im: InputManager) {
         inputs.add(im)
     }
 

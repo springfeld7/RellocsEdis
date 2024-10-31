@@ -10,8 +10,8 @@ import kotlin.math.round
  * @author Ulf Benjaminsson
  */
 class Viewport(
-    val screenWidth: Int,
-    val screenHeight: Int,
+    private val screenWidth: Int,
+    private val screenHeight: Int,
     metersToShowX: Float,
     metersToShowY: Float
 ) : Entity() {

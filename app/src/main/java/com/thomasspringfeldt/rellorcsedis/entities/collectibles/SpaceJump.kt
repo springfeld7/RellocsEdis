@@ -15,10 +15,10 @@ const val SUPER_JUMP_MODIFIER = 2f
  * PowerUp that makes the player jump really high.
  * @author Thomas Springfeldt
  */
-class SpaceJump(spriteName: String, x: Float, y: Float, ) : PowerUp(spriteName, x, y, SUPER_JUMP_DURATION) {
+class SpaceJump(spriteName: String, x: Float, y: Float) : PowerUp(spriteName, x, y, SUPER_JUMP_DURATION) {
 
     override fun update(deltaTime: Float) {
-        if (isActive && System.currentTimeMillis() - timer >= SUPER_JUMP_DURATION) {
+        if (isActive && System.currentTimeMillis() - timer >= pwrUpDuration) {
             owner.jumpForce /= SUPER_JUMP_MODIFIER
             owner.bitmap = engine.bitmapPool.createBitmap(PLAYER, owner.width, owner.height)
             isDead = true

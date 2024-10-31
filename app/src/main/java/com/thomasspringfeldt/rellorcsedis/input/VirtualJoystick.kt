@@ -15,11 +15,11 @@ const val MAX_STICK_TRAVEL = 64
 class VirtualJoystick(view: View) : InputManager() {
 
     private val tag = "VirtualJoystick"
-    protected var maxStickTravel =
+    private var maxStickTravel =
         dpToPixels(MAX_STICK_TRAVEL).toFloat() //arbritrary! 96DP = twice the minimum hit target.
-    protected var stickCenterX =
+    private var stickCenterX =
         0f //the stick center is placed wherever the user put their finger down
-    protected var stickCenterY =
+    private var stickCenterY =
         0f //we can then calculate how far they've slide the stick from that position
 
     init {
@@ -35,24 +35,28 @@ class VirtualJoystick(view: View) : InputManager() {
         return (px / Resources.getSystem().displayMetrics.density).toInt()
     }
 
-    fun dpToPixels(dp: Int): Int {
+    private fun dpToPixels(dp: Int): Int {
         return (dp * Resources.getSystem().displayMetrics.density).toInt()
     }
 
     private inner class JoystickTouchListener : View.OnTouchListener {
         override fun onTouch(v: View, event: MotionEvent): Boolean {
             val action = event.actionMasked
-            if (action == MotionEvent.ACTION_DOWN) {
-                stickCenterX = event.getX(0)
-                stickCenterY = event.getY(0)
-            } else if (action == MotionEvent.ACTION_UP) {
-                horizontalFactor = 0.0f
-                verticalFactor = 0.0f
-            } else if (action == MotionEvent.ACTION_MOVE) {
-                //get the proportion to the maxStickTravel
-                horizontalFactor = (event.getX(0) - stickCenterX) / maxStickTravel
-                verticalFactor = (event.getY(0) - stickCenterY) / maxStickTravel
-                clampInputs() //nothing stops the user from pulling the joystick across the entire screen. So lets clamp the inputs. :)
+            when (action) {
+                MotionEvent.ACTION_DOWN -> {
+                    stickCenterX = event.getX(0)
+                    stickCenterY = event.getY(0)
+                }
+                MotionEvent.ACTION_UP -> {
+                    horizontalFactor = 0.0f
+                    verticalFactor = 0.0f
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    //get the proportion to the maxStickTravel
+                    horizontalFactor = (event.getX(0) - stickCenterX) / maxStickTravel
+                    verticalFactor = (event.getY(0) - stickCenterY) / maxStickTravel
+                    clampInputs() //nothing stops the user from pulling the joystick across the entire screen. So lets clamp the inputs. :)
+                }
             }
             return true
         }

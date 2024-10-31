@@ -7,5 +7,4 @@ interface GamepadListener {
 
     fun dispatchGenericMotionEvent(event: MotionEvent): Boolean
     fun dispatchKeyEvent(event: KeyEvent): Boolean
-
 }

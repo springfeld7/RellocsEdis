@@ -71,7 +71,7 @@ class LevelManager(data: Level) {
         }
     }
 
-    fun addAndRemoveEntities() {
+    private fun addAndRemoveEntities() {
         entities.removeAll(entitiesToRemove.toSet())
         entitiesToRemove.clear()
 
@@ -87,10 +87,10 @@ class LevelManager(data: Level) {
         entitiesToRemove.add(entity)
     }
 
-    fun loadAssets(data: Level) {
+    private fun loadAssets(data: Level) {
         for (y in 0 until data.height()) {
             val row = data.getRow(y)
-            for (x in 0 until row.size) {
+            for (x in row.indices) {
                 val tileId = row[x]
                 if (tileId != NO_TILE) {
                     val spriteName = data.getSpriteName(tileId)

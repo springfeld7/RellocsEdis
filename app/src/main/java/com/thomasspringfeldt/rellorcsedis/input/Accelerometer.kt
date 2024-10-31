@@ -21,22 +21,18 @@ const val SHAKE_COOLDOWN: Long = 300 //ms
  * Accelerometered game input.
  * @author Thomas Springfeldt
  */
-class Accelerometer(val activity: MainActivity) : InputManager() {
+class Accelerometer(private val activity: MainActivity) : InputManager() {
 
     private val lastAccels = FloatArray(LENGTH)
     private val lastMagFields = FloatArray(LENGTH)
     private var lastShake: Long = 0 //avoid constant jumping for minor movements of the device
     private val rotationMatrix = FloatArray(4 * 4)
     private val orientation = FloatArray(LENGTH)
-    private val rotation: Int //default orientation of the device
-
-    init {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            rotation = activity.display?.rotation ?: 0
-        } else {
-            rotation = activity.windowManager.defaultDisplay.rotation
-        }
-    }
+    private val rotation: Int = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        activity.display?.rotation ?: 0
+    } else {
+        activity.windowManager.defaultDisplay.rotation
+    } //default orientation of the device
 
     private fun registerListeners() {
         val sm = activity.getSystemService(Activity.SENSOR_SERVICE) as SensorManager
@@ -77,10 +73,10 @@ class Accelerometer(val activity: MainActivity) : InputManager() {
     private fun getHorizontalAxis(): Float {
         if (!SensorManager.getRotationMatrix(rotationMatrix, null, lastAccels, lastMagFields)) {
             // Case for devices that DO NOT have magnetic sensors
-            if (rotation == Surface.ROTATION_0) {
-                return -lastAccels[0] * 5
+            return if (rotation == Surface.ROTATION_0) {
+                -lastAccels[0] * 5
             } else {
-                return -lastAccels[1] * -5
+                -lastAccels[1] * -5
             }
         } else { //we have a geomagnetic sensor and are not in free fall! Jay! :D
             if (rotation == Surface.ROTATION_0) {

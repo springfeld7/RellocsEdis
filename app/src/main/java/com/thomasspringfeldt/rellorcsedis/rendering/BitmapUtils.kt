@@ -8,7 +8,7 @@ import android.graphics.Matrix
 import android.graphics.Point
 
 object BitmapUtils {
-    private const val tag = "BitmapUtils"
+    private val tag = "BitmapUtils"
 
     fun scaleBitmap(bmp: Bitmap, targetWidth: Int, targetHeight: Int, useBilinearFiltering: Boolean = true): Bitmap {
         if (targetWidth == bmp.width && targetHeight == bmp.height) return bmp

@@ -40,7 +40,7 @@ class Player(spriteName: String, x: Float, y: Float) :
         bitmap = engine.bitmapPool.createBitmap(spriteName, width, height)
     }
 
-    override fun update(dt: Float) {
+    override fun update(deltaTime: Float) {
         val controls: InputManager = engine.getControls()
         val direction: Float = controls.horizontalFactor
         velX = direction * PLAYER_RUN_SPEED
@@ -55,7 +55,7 @@ class Player(spriteName: String, x: Float, y: Float) :
             handleIFrames(IFRAMES_DURATION)
         }
 
-        super.update(dt) //parent will integrate our velocity and time with our position
+        super.update(deltaTime) //parent will integrate our velocity and time with our position
     }
 
     override fun render(canvas: Canvas, transform: Matrix, paint: Paint) {

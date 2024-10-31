@@ -4,12 +4,13 @@ import android.view.InputDevice
 import android.view.KeyEvent
 import android.view.MotionEvent
 import com.thomasspringfeldt.rellorcsedis.MainActivity
+import kotlin.math.abs
 
 /**
  * Class for handling physical gamepads.
  * @author Thomas Springfeldt
  */
-class Gamepad(val activity: MainActivity) : InputManager(), GamepadListener {
+class Gamepad(private val activity: MainActivity) : InputManager(), GamepadListener {
 
     override fun dispatchGenericMotionEvent(event: MotionEvent): Boolean {
         if (event.source and InputDevice.SOURCE_JOYSTICK != InputDevice.SOURCE_JOYSTICK) {
@@ -26,10 +27,10 @@ class Gamepad(val activity: MainActivity) : InputManager(), GamepadListener {
         val source = event.source
         var result = event.getAxisValue(axis)
         var range = device.getMotionRange(axis, source)
-        if (Math.abs(result) <= range.flat) {
+        if (abs(result) <= range.flat) {
             result = event.getAxisValue(fallbackAxis)
             range = device.getMotionRange(fallbackAxis, source)
-            if (Math.abs(result) <= range.flat) {
+            if (abs(result) <= range.flat) {
                 result = 0.0f
             }
         }
@@ -86,7 +87,7 @@ class Gamepad(val activity: MainActivity) : InputManager(), GamepadListener {
         return wasConsumed
     }
 
-    fun isJumpKey(keyCode: Int): Boolean {
+    private fun isJumpKey(keyCode: Int): Boolean {
         return keyCode == KeyEvent.KEYCODE_DPAD_UP || keyCode == KeyEvent.KEYCODE_BUTTON_A || keyCode == KeyEvent.KEYCODE_BUTTON_X || keyCode == KeyEvent.KEYCODE_BUTTON_Y
     }
 

@@ -13,7 +13,7 @@ const val INVINCIBILITY_DURATION = 7500
 class Invincibility(spriteName: String, x: Float, y: Float) : PowerUp(spriteName, x, y, INVINCIBILITY_DURATION) {
 
     override fun update(deltaTime: Float) {
-        if (isActive && System.currentTimeMillis() - timer >= INVINCIBILITY_DURATION) {
+        if (isActive && System.currentTimeMillis() - timer >= pwrUpDuration) {
             owner.isInvincible = false
             isDead = true
         }
@@ -30,7 +30,6 @@ class Invincibility(spriteName: String, x: Float, y: Float) : PowerUp(spriteName
             owner.isBlinking = true
             owner.blinkTimer = System.currentTimeMillis()
         }
-
         super.onCollision(that)
     }
 }

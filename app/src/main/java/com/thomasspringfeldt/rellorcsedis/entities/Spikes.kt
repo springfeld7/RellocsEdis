@@ -12,15 +12,11 @@ const val SPIKES_TILE_OFFSET = 0.6f
 class Spikes(spriteName: String, x: Float, y: Float) :
     StaticEntity(spriteName, x, y + SPIKES_TILE_OFFSET) {
 
-    var damage = 1.0f;
+    var damage = 1.0f
 
     init {
         height = 0.4f
         engine.bitmapPool.remove(bitmap)
         bitmap = engine.bitmapPool.createBitmap(spriteName, width, height)
-    }
-
-    override fun onCollision(that: Entity) {
-        super.onCollision(that)
     }
 }

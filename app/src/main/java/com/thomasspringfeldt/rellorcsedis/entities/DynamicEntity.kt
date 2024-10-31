@@ -24,10 +24,7 @@ open class DynamicEntity(spriteName: String, x: Float, y: Float) : StaticEntity(
     }
 
     override fun onCollision(that: Entity) {
-        var overlap = getOverlap(this, that)
-        if (overlap == null) {
-            return
-        }
+        val overlap = getOverlap(this, that) ?: return
         if (overlap.x != 0f) {
             x += overlap.x
             velX = 0f
