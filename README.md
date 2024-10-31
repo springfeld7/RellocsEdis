@@ -31,7 +31,7 @@ by Ulf Benjaminssson).
 6 - Add audio
 
 - BGM for level 1 and 2 added. Added FX for all important interactions:
-- level start, jump, coin pickup, take damage, game over, level goal
+- level start, jump, powerup pickup, coin pickup, take damage, game over, level goal
 
 ---
 
