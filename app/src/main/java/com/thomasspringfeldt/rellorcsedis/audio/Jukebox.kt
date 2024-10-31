@@ -59,6 +59,7 @@ class Jukebox(val engine: Game) {
         loadEventSound(GameEvent.Jump, "sfx/jump.wav")
         loadEventSound(GameEvent.TakeDamage, "sfx/take_damage.wav")
         loadEventSound(GameEvent.GameOver, "sfx/gameover.wav")
+        loadEventSound(GameEvent.PowerUpPickup, "sfx/powerup_pickup.wav")
         loadEventSound(GameEvent.CoinPickup, "sfx/coin_pickup.wav")
         loadEventSound(GameEvent.LevelStart, "sfx/level_start.wav")
         loadEventSound(GameEvent.LevelGoal, "sfx/level_goal.wav")
