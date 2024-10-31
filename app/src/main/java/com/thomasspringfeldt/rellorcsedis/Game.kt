@@ -124,23 +124,25 @@ class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context,
 
 
     fun loadNextLevel() {
-        onGameEvent(GameEvent.LevelGoal, null)
-        val timer = System.currentTimeMillis()
-        while (System.currentTimeMillis() - timer < 5400) {
 
-        }
+        val timer = System.currentTimeMillis()
+        while (System.currentTimeMillis() - timer < 5400) {  } //let goal fanfare finish
+
+        level = LevelManager(Level((nextLevel % 2) + 1)) //load next level into level manager
         nextLevel++
-        level = LevelManager(Level(nextLevel))
+
+        //update affected references
         player = level.player
         hud = HUD(player, level)
 
         onGameEvent(GameEvent.LevelStart, null)
 
+        //quick and dirty solution for looping through level bgms
         jukebox.resetBgMusicPlayer()
-        jukebox.loadMusic("bgm/bgm_2.wav")
+        if (nextLevel % 2 == 1) {
+            jukebox.loadMusic("bgm/bgm_1.wav")
+        } else { jukebox.loadMusic("bgm/bgm_2.wav") }
         jukebox.resumeBgMusic()
-
-
     }
 
     private fun checkGameOver() {
