@@ -11,9 +11,7 @@ const val COIN_TILE_OFFSET = 0.5f - COIN_SIDE_RATIO / 2
  * @author Thomas Springfeldt
  */
 class Coin(spriteName: String, x: Float, y: Float) :
-    DynamicEntity(spriteName, x + COIN_TILE_OFFSET, y) {
-
-    var isDead = false
+    Collectible(spriteName, x + COIN_TILE_OFFSET, y) {
 
     init {
         height = COIN_SIDE_RATIO
