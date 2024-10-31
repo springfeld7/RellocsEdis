@@ -12,7 +12,7 @@ const val PLAYER_RUN_SPEED = 6f //meters per second
 const val PLAYER_JUMP_FORCE: Float = -(GRAVITY / 2f) //whatever feels good!
 const val LEFT = 1f
 const val RIGHT = -1f
-const val INVINCIBILITY_WINDOW = 1500
+const val IFRAMES_DURATION = 1500
 const val BLINK_LENGTH = 150
 
 class Player(spriteName: String, x: Float, y: Float) :
@@ -104,7 +104,7 @@ class Player(spriteName: String, x: Float, y: Float) :
     }
 
     private fun handleIFrames() {
-        if (iFramesIsActive && System.currentTimeMillis() - iFramesTimer > INVINCIBILITY_WINDOW) {
+        if (iFramesIsActive && System.currentTimeMillis() - iFramesTimer > IFRAMES_DURATION) {
             iFramesIsActive = false
             isBlinking = false
         }
