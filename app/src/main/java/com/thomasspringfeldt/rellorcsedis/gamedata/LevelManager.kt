@@ -30,6 +30,7 @@ class LevelManager(data: Level) {
     private val entitiesToAdd = ArrayList<Entity>()
     private val entitiesToRemove = ArrayList<Entity>()
     var levelHeight = 0f
+    var levelWidth = 0f
 
     init {
         loadAssets(data)
@@ -99,6 +100,7 @@ class LevelManager(data: Level) {
             }
         }
         levelHeight = data.height().toFloat()
+        levelWidth = data.width().toFloat()
         addAndRemoveEntities()
     }
 
