@@ -8,7 +8,7 @@ import com.thomasspringfeldt.rellorcsedis.entities.Player
 const val SUPER_JUMP = "super_jump_pwrup"
 const val SUPER_JUMP_SUIT = "white_left1"
 const val SUPER_JUMP_DURATION = 10000
-const val SUPER_JUMP_MODIFIER = 2f
+const val SUPER_JUMP_MODIFIER = 1.4f
 
 
 /**
