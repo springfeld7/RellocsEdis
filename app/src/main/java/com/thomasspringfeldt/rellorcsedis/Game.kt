@@ -60,6 +60,7 @@ class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context,
     fun screenHeight() = context.resources.displayMetrics.heightPixels
     fun screenWidth() = context.resources.displayMetrics.widthPixels
     fun levelHeight() = level.levelHeight
+    fun levelWidth() = level.levelWidth
     fun setControls(control: InputManager) {
         inputs.onPause() //give the previous controller
         inputs.onStop() //a chance to clean up
@@ -95,7 +96,7 @@ class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context,
      */
     private fun update(deltaTime: Float) {
         level.update(deltaTime)
-        camera.lookAt(player)
+        camera.lookAtWithBounds(player)
         checkGameOver()
     }
 
