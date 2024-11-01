@@ -71,6 +71,7 @@ class Game(context: Context, attrs: AttributeSet? = null) : SurfaceView(context,
     fun getControls() = inputs
     fun getActivity() = context as MainActivity
     fun getAssets() = context.assets
+    fun getJukebox() = jukebox
     fun getPreferences() = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
     fun getPreferencesEditor() = getPreferences().edit()
     fun savePreference(key: String, v: Boolean) = getPreferencesEditor().putBoolean(key, v).commit()
