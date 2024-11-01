@@ -33,6 +33,10 @@ by Ulf Benjaminssson).
 - BGM for level 1 and 2 added. Added FX for all important interactions:
 - level start, jump, powerup pickup, coin pickup, take damage, game over, level goal
 
+7 - Improve the Viewport by adding support for world-bounds
+
+- Added Viewport::lookAtWithBounds
+
 ---
 
 ## Pass With Distinction Achievements:
